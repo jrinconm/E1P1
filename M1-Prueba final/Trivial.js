@@ -2,16 +2,11 @@
 Creditos a Lionel de las preguntas de saber y ganar
 */
 "use strict";
-let geografia = [
-    ["Cuál es el idioma más hablado en Suiza","Alemán","Ingles", "Frances", "Italiano"],
-    ["Qué país está entre Perú y Colombia","Ecuador", "México", "Brasil", "Argentina"],
-    ["Cuál es el río más largo de Europa Occidental", "Rin", "Venubio","Tajo", "Nilo"],
-]
 class Pregunta {
     constructor (pregunta){
-        this.pregunta=preguntaAzar[0];
-        this.respuesta=preguntaAzar[1];
-        this.opciones=[preguntaAzar[2],preguntaAzar[3],preguntaAzar[4]]
+        this.pregunta=pregunta[0];
+        this.respuesta=pregunta[1];
+        this.opciones=[pregunta[2],pregunta[3],pregunta[4]]
     }
     // Comprueba la respuesta y devuelve si es correcta o no
     compruebaRespuesta(respuestaUsuario){
@@ -28,21 +23,35 @@ class Partida {
     // Inicializo los valores
     constructor (){
         // Parametrizo los valores para victoria y derrota
-        let ganar=6, perder=3;
-        let aciertos=0,fallos=0;        
+        this.ganar=6;
+        this.perder=3;
+        this.aciertos=0;
+        this.fallos=0;        
     }
     // El metodo que inicia la partida
     jugar(){
         // Si no se gana ni pierde se continua
-        while(aciertos < ganar && fallos < perder){
+        while(this.aciertos < this.ganar && this.fallos < this.perder){
             // Genero una pregunta del array
-
-            pregunta = new Pregunta;
-
+            let preguntaAzar=Pregunta.generaPregunta(geografia);
+            console.log(preguntaAzar);
+            let pregunta = new Pregunta(preguntaAzar);
+            console.log(pregunta);
         }
     }
 }
-let preguntaAzar=Pregunta.generaPregunta(geografia);
-console.log(preguntaAzar);
-let primeraPregunta = new Pregunta(preguntaAzar);
-console.log(primeraPregunta);
+let geografia = [
+    ["¿Cuál es el idioma más hablado en Suiza?","Alemán","Ingles","Frances","Italiano"],
+    ["¿Qué país está entre Perú y Colombia?","Ecuador","México","Brasil","Argentina"],
+    ["¿Cuál es el río más largo de Europa Occidental?","Rin","Venubio","Tajo","Nilo"],
+    ["¿Qué lago baña la ciudad de Ginebra?","El lago Leman","El lago Azul","El lago Victoria","El lago Tanganica"], 
+    ["¿En qué país europeo se habla el magyar?","Hungría","Mauritania","Magyaría","Mauritania"],
+    ["¿Qué palabra significa “hijo de” en los apellidos escoceses?","Mac","Gregor","Colin","Leod"],
+    ["¿Cuál es la capital de Indonesia?","Jakarta","Indonesia","India","Nueva Delhi"],
+    ["¿En qué país se encuentra el pico Aconcagua?","Argentina","China","Brasil","Africa"],
+    ["¿En qué hemisferio se encuentra Jamaica?","Norte","Sur","Este","Oeste"],
+    ["¿A qué país pertenece la isla de Creta?","Grecia","Turquía","Egipto","Italia"]
+];
+let juego = new Partida;
+console.log(juego);
+juego.jugar();
