@@ -2,24 +2,25 @@
 Creditos a Lionel de las preguntas de saber y ganar
 */
 "use strict";
+let geografia = [
+    ["Cuál es el idioma más hablado en Suiza","Alemán","Ingles", "Frances", "Italiano"],
+    ["Qué país está entre Perú y Colombia","Ecuador", "México", "Brasil", "Argentina"],
+    ["Cuál es el río más largo de Europa Occidental", "Rin", "Venubio","Tajo", "Nilo"],
+]
 class Pregunta {
-    constructor (listapreguntas){
-        this.preguntaAzar = generaPregunta(listapreguntas);
+    constructor (pregunta){
         this.pregunta=preguntaAzar[0];
         this.respuesta=preguntaAzar[1];
-    }
-    // Getter para obtener la pregunta
-    get pregunta(){
-        return this.pregunta;
+        this.opciones=[preguntaAzar[2],preguntaAzar[3],preguntaAzar[4]]
     }
     // Comprueba la respuesta y devuelve si es correcta o no
     compruebaRespuesta(respuestaUsuario){
         return (respuesta===respuestaUsuario);
     }
     // Obtiene la pregunta de una lista de preguntas
-    generaPregunta(listapreguntas){
+    static generaPregunta(listapreguntas){
         let cantidadPreguntas = listapreguntas.length;
-        let preguntaAzar=Math.floor(Math.random()*(listapreguntas.length+1));
+        let preguntaAzar=Math.floor(Math.random()*(listapreguntas.length));
         return listapreguntas[preguntaAzar];
     }
 }
@@ -41,3 +42,7 @@ class Partida {
         }
     }
 }
+let preguntaAzar=Pregunta.generaPregunta(geografia);
+console.log(preguntaAzar);
+let primeraPregunta = new Pregunta(preguntaAzar);
+console.log(primeraPregunta);
