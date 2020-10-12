@@ -30,14 +30,15 @@ class Partida {
     }
     // El metodo que inicia la partida
     jugar(){
+        // Defino los 7 tipos de preguntas
+        const tipos = [geografia,entretenimiento];
+        // Creo la lista de preguntas
+        let preguntas = tipos.map(tipo=>Pregunta.generaPregunta(tipo));
         // Si no se gana ni pierde se continua
-        while(this.aciertos < this.ganar && this.fallos < this.perder){
+        //while(this.aciertos < this.ganar && this.fallos < this.perder){
             // Genero una pregunta del array
-            let preguntaAzar=Pregunta.generaPregunta(geografia);
-            console.log(preguntaAzar);
-            let pregunta = new Pregunta(preguntaAzar);
-            console.log(pregunta);
-        }
+            console.log(preguntas);
+        //}
     }
 }
 let geografia = [
@@ -52,6 +53,17 @@ let geografia = [
     ["¿En qué hemisferio se encuentra Jamaica?","Norte","Sur","Este","Oeste"],
     ["¿A qué país pertenece la isla de Creta?","Grecia","Turquía","Egipto","Italia"]
 ];
+let entretenimiento = [
+    ["¿Cuál es el oso más famoso del parque nacional de Yellowstone?","El oso Yogui","EL oso Bubu","Baloo","Winnie the Pooh"]
+    ["¿Qué actor, que no era el feo ni el malo, era el bueno?","Clint Eastwood","Terence Hill","Robert Pattinson","Val Kilmer"],
+    ["¿Con qué director de cine italiano se casó la actriz Giulietta Masina?","Federico Fellini","Vittorio de Sica","Mario Monicelli","Paolo Vasile"],
+    ["¿Quién fue la gran ganadora de los Grammy Latinos 2018?","Rosalía","Medina Azahara","Camila Cabello","Rihanna"],
+    ["¿Cuál de los Siete Enanitos no tenía barba?","Mudito","Gruñón","Bonachón","Calvito"],
+    ["¿Qué conocido actor español protagonizó “La máscara del Zorro” en 1998?","Antonio Banderas","La Roca","Santiago Segura","Javier Bardem"],
+    ["¿Cuál es el tipo de música por el que se conoció mundialmente Astrud Gilberto?","Bossa Nova","Trance","Pop","Vals"],
+    ["¿Qué canción de Los Beatles ha sido la más grabada?","Yesterday","Tomorrow","California Girls","Bohemian Rhapsody"],
+    ["¿Quién dijo: “Hitler me ha copiado el bigote”?","Charlie Chaplin","Jose María Aznar","Mario Moreno Cantinflas","Oliver Hardy"],
+    ["¿Quién fue la primera voz de Mickey Mouse?","Walt Disney","Florentino Fernandez","James McDonald","Wayne Allwine"]
+];
 let juego = new Partida;
-console.log(juego);
 juego.jugar();
