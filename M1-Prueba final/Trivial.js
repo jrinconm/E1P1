@@ -12,8 +12,6 @@ class Pregunta {
     }
     // Comprueba la respuesta y devuelve si es correcta o no
     compruebaRespuesta(respuestaUsuario){
-        console.log(this.opciones);
-        console.log("Compruebo "+this.respuesta+" con " + this.opciones[parseInt(respuestaUsuario)-1]);
         return (this.respuesta===this.opciones[parseInt(respuestaUsuario)-1]);
     }
     // Crea el texto con la pregunta y las opciones
@@ -35,7 +33,7 @@ class Pregunta {
             arrayTemporal.push(arrayIntercambio[extraerOpcion]);
             arrayIntercambio.splice(extraerOpcion,1);
         }
-        console.log(arrayTemporal);
+        this.opciones = [...arrayTemporal];
         return [...arrayTemporal];
        }
     // Obtiene la pregunta de una lista de preguntas
