@@ -12,7 +12,9 @@ class Pregunta {
     }
     // Comprueba la respuesta y devuelve si es correcta o no
     compruebaRespuesta(respuestaUsuario){
-        return (respuesta===respuestaUsuario);
+        console.log(this.opciones);
+        console.log("Compruebo "+this.respuesta+" con " + this.opciones[parseInt(respuestaUsuario)-1]);
+        return (this.respuesta===this.opciones[parseInt(respuestaUsuario)-1]);
     }
     // Crea el texto con la pregunta y las opciones
     creaTextoPregunta(){
@@ -25,12 +27,13 @@ class Pregunta {
     }
     // Cambia el orden de las opciones al azar
     cambiaOpciones(){
+        let arrayIntercambio=[...this.opciones];
         let arrayTemporal=[];
-        let cantidadOpciones=this.opciones.length;
+        let cantidadOpciones=arrayIntercambio.length;
         for(let cont=0;cont<cantidadOpciones;cont++){
-            let extraerOpcion=Math.floor(Math.random()*this.opciones.length);
-            arrayTemporal.push(this.opciones[extraerOpcion]);
-            this.opciones.splice(extraerOpcion,1);
+            let extraerOpcion=Math.floor(Math.random()*arrayIntercambio.length);
+            arrayTemporal.push(arrayIntercambio[extraerOpcion]);
+            arrayIntercambio.splice(extraerOpcion,1);
         }
         console.log(arrayTemporal);
         return [...arrayTemporal];
@@ -65,7 +68,13 @@ class Partida {
         while(this.aciertos < this.ganar && this.fallos < this.perder){
             // Genero una pregunta del array
             let preguntaActual=listaPreguntas.pop();
-            prompt(preguntaActual.creaTextoPregunta());
+            let respuestaUsuario=prompt(preguntaActual.creaTextoPregunta());
+            if(preguntaActual.compruebaRespuesta(respuestaUsuario)){
+                this.aciertos++;
+            } else {
+                this.fallos++;
+            }
+            console.log("Aciertos: "+ this.aciertos + " - Fallos: " + this.fallos);
         }
     }
 }
