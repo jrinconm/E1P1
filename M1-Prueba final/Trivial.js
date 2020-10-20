@@ -7,19 +7,34 @@ class Pregunta {
         this.pregunta=pregunta;
         this.texto=pregunta[0];
         this.respuesta=pregunta[1];
-        this.opciones=[pregunta[2],pregunta[3],pregunta[4]]
+        this.opciones=[...pregunta];
+        this.opciones.shift();
     }
     // Comprueba la respuesta y devuelve si es correcta o no
     compruebaRespuesta(respuestaUsuario){
         return (respuesta===respuestaUsuario);
     }
+    // Crea el texto con la pregunta y las opciones
     creaTextoPregunta(){
-        let texto=this.texto+"\n"+this.pregunta[1];
-        for(const opcion in this.opciones){
-            texto+="\n"+this.opciones[opcion];
+        let textoMostrar=this.texto+"\n";
+        let opcionesMostrar=this.cambiaOpciones();
+        for(const opcion in opcionesMostrar){
+            textoMostrar+=(parseInt(opcion)+1) + ".-" +opcionesMostrar[opcion] + "\n";
         }
-        return texto;
+        return textoMostrar;
     }
+    // Cambia el orden de las opciones al azar
+    cambiaOpciones(){
+        let arrayTemporal=[];
+        let cantidadOpciones=this.opciones.length;
+        for(let cont=0;cont<cantidadOpciones;cont++){
+            let extraerOpcion=Math.floor(Math.random()*this.opciones.length);
+            arrayTemporal.push(this.opciones[extraerOpcion]);
+            this.opciones.splice(extraerOpcion,1);
+        }
+        console.log(arrayTemporal);
+        return [...arrayTemporal];
+       }
     // Obtiene la pregunta de una lista de preguntas
     static generaPregunta(listapreguntas){
         let cantidadPreguntas = listapreguntas.length;
@@ -45,7 +60,6 @@ class Partida {
         let listaPreguntas=[];
         for(const pregunta in preguntas){
             listaPreguntas.push(new Pregunta(preguntas[pregunta]));
-            console.log(listaPreguntas[0]);
         }
         // Si no se gana ni pierde se continua
         while(this.aciertos < this.ganar && this.fallos < this.perder){
