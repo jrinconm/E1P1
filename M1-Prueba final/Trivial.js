@@ -48,11 +48,11 @@ class Partida {
             console.log(listaPreguntas[0]);
         }
         // Si no se gana ni pierde se continua
-        //while(this.aciertos < this.ganar && this.fallos < this.perder){
+        while(this.aciertos < this.ganar && this.fallos < this.perder){
             // Genero una pregunta del array
             let preguntaActual=listaPreguntas.pop();
             prompt(preguntaActual.creaTextoPregunta());
-        //}
+        }
     }
 }
 let geografia = [
