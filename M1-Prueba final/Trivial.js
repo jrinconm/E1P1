@@ -55,7 +55,7 @@ class Partida {
     // El metodo que inicia la partida
     jugar(){
         // Defino los 7 tipos de preguntas
-        const tipos = [geografia,entretenimiento];
+        const tipos = [geografia,entretenimiento,historia];
         // Creo la lista de preguntas
         let preguntas = tipos.map(tipo=>Pregunta.generaPregunta(tipo));
         let listaPreguntas=[];
@@ -67,10 +67,14 @@ class Partida {
             // Genero una pregunta del array
             let preguntaActual=listaPreguntas.pop();
             let respuestaUsuario=prompt(preguntaActual.creaTextoPregunta());
+            // Si acierto sumo un acierto, si fallo sumo un fallo. Muestro mensaje en ambos casos.
             if(preguntaActual.compruebaRespuesta(respuestaUsuario)){
                 this.aciertos++;
+                alert("Acertaste!!! Sumas 1 punto.");
             } else {
                 this.fallos++;
+                // Muestro la respuesta correcta
+                alert("Fallo!!! La respuesta era:\n"+preguntaActual.respuesta);
             }
             console.log("Aciertos: "+ this.aciertos + " - Fallos: " + this.fallos);
         }
