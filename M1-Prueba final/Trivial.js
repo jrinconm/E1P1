@@ -55,7 +55,7 @@ class Partida {
     // El metodo que inicia la partida
     jugar(){
         // Defino los 7 tipos de preguntas
-        const tipos = [geografia,entretenimiento,historia,arteLiteratura,cienciasNaturaleza];
+        const tipos = [geografia,entretenimiento,historia,arteLiteratura,cienciasNaturaleza,deportesPasatiempos,culturaPopular];
         // Creo la lista de preguntas
         let preguntas = tipos.map(tipo=>Pregunta.generaPregunta(tipo));
         let listaPreguntas=[];
@@ -140,36 +140,30 @@ let cienciasNaturaleza = [
     ["¿Cuál de los cinco sentidos se desarrolla el primero?","Olfato","Oido","Tacto","Gusto"],
     ["¿Cuál es el dedo más sensible de la mano?","Índice","Meñique","Anular","Corazón"]
 ];
-/*
+let deportesPasatiempos = [
+    ["¿Qué pieza de ajedrez puede hacer un movimiento en forma de L?","Caballo","Torre","Reina","Borracho"]
+    ["¿Cómo se llaman los deportistas que practican el judo?","Judokas","Karatekas","Artistas marciales","Judenses"],
+    ["¿Qué deporte practican los Harlem Globetrotters?","Baloncesto","Viajan en globo","Futbol","Beisbol"],
+    ["¿A cuántos puntos se disputa un set en el tenis de mesa?","Veintiuno","Cuarenta y cinco","El mejor de tres","Dos partes de 45 minutos cada una"],
+    ["¿Qué obtienes si añades fruta fresca al vino tinto?","Sangría","Vino saludable","Ron","Manzanilla"],
+    ["¿A qué equipo de fútbol pertenecía el estadio Metropolitano?","Atlético de Madrid","Metrópolis","Nueva York","Valencia"],
+    ["¿En qué país se encuentra el circuito de Le Mans?","Francia","Jerez","Estados Unidos","Dubai"],
+    ["¿Quién fueron los finalistas de baloncesto en los Juegos Olímpicos de Los Ángeles de 1984?","España y Estados Unidos","España y Japon","Estados Unidos y Japon","Estados Unidos y Francia"],
+    ["¿Cuál era el nombre anterior de Muhammad Alí?","Cassius Clay","The Rock","Simbad","Poli Díaz"],
+    ["¿Cuántos jugadores tiene un equipo de voleibol?","Seis","Once","Dos","Nueve"]
+];
+let culturaPopular = [
+    ["¿Quién fue el primer presentador del concurso 'Un, dos, tres, responda otra vez' que se emitía en Televisión Española?","Kiko Ledgard","Mayra Gomez Kemp","Chicho Ibáñez Serrador","Chiquito de la calzada"]
+    ["¿En qué popular serie de TV podemos ubicar a un personaje llamado Walter White?","En Breaking Bad","En Bonanza","En Fariña","Cuéntame como pasó"],
+    ["¿Qué popular serie de Netflix nos habla sobre la vida del narcotraficante Pablo Escobar Gaviria?","Narcos","Fariña","Happy","Juego de tronos"],
+    ["¿Qué actor interpreta el personaje de Leonard Hofstadter en la serie 'The Big Bang Theory'?","Johnny Galecki","Sheldon Cooper","Jim Parsons","Simon Helberg"],
+    ["¿Cuál es el nombre de pila del aventurero Bear Grylls?","Edward","Jhon","Yogui","Alfred"],
+    ["¿Cómo se llama el actor que interpreta al Dr House?","Hugh Laurie","Hugh Grant","Cary Grant","Cavadas"],
+    ["¿Cuáles son los apellidos de los cirujanos que protagonizan la serie 'Nip/Tuck'?","McNamara y Troy","Jekyll y Hyde","Jack y TheRipper","Cyrus y Hemsworth"],
+    ["¿Qué artista tiene en su poder más premios Grammy?","Georg Solti","Beyonce","Julio Iglesias","Billie Eilish"],
+    ["¿Qué artista tiene en su poder más premios Emmy?","Julia Louis Dreyfus","Beyonce","Julio Iglesias","Regina King"],
+    ["¿Qué jugador de la NBA fue pareja durante un tiempo de la popular Kim Kardashian?","Kris Humphries","Kanye West","Damon Thomas","Pau Gasol"]
+];
 
-
-Deportes y Pasatiempos (naranja)
-51. ¿Qué pieza de ajedrez puede hacer un movimiento en forma de L?
-52. ¿Cómo se llaman los deportistas que practican el judo?
-53. ¿Qué deporte practican los Harlem Globetrotters?
-54. ¿A cuántos puntos se disputa un set en el tenis de mesa?
-55. ¿Qué obtienes si añades fruta fresca al vino tinto?
-56. ¿A qué equipo de fútbol pertenecía el estadio Metropolitano?
-57. ¿En qué país se encuentra el circuito de Le Mans?
-58. ¿Quién fueron los finalistas de baloncesto en los Juegos Olímpicos de Los Ángeles de 1984?
-59. ¿Cuál era el nombre anterior de Muhammad Alí?
-60. ¿Cuántos jugadores tiene un equipo de voleibol?
-Soluciones:
-51. Caballo 52. Judokas 53. Baloncesto 54. Veintiuno 55. Sangría 56. Atlético de Madrid 57. Francia 58. España y Estados Unidos 59. Cassius Clay 60. Seis
-
-Cultura popular
-61. ¿Quién fue el primer presentador del concurso "Un, dos, tres, responda otra vez" que se emitía en Televisión Española?
-62. ¿En qué popular serie de TV podemos ubicar a un personaje llamado Walter White?
-63. ¿Qué popular serie de Netflix nos habla sobre la vida del narcotraficante Pablo Escobar Gaviria?
-64. ¿Qué actor interpreta el personaje de Leonard Hofstadter en la serie "The Big Bang Theory"?
-65. ¿Cuál es el nombre de pila del aventurero Bear Grylls?
-66. ¿Cómo se llama el actor que interpreta al Dr House?
-67. ¿Cuáles son los apellidos de los cirujanos que protagonizan la serie 'Nip/Tuck'?
-68. ¿Qué artista tiene en su poder más premios Grammy?
-69. ¿Qué artista tiene en su poder más premios Emmy?
-70. ¿Qué jugador de la NBA fue pareja durante un tiempo de la popular Kim Kardashian?
-Soluciones:
-61. Kiko Ledgard 62. En Breaking Bad 63. Narcos 64. Johnny Galecki 65. Edward 66. Hugh Laurie 67. McNamara y Troy 68. Georg Solti 69. Julia Louis Dreyfus 70. Kris Humphries
-*/
 let juego = new Partida;
 juego.jugar();
