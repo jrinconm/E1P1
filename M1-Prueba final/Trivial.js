@@ -38,7 +38,9 @@ class Pregunta {
        }
     // Obtiene la pregunta de una lista de preguntas
     static generaPregunta(listapreguntas){
+        console.log(listapreguntas);
         let cantidadPreguntas = listapreguntas.length;
+        console.log(cantidadPreguntas);
         let preguntaAzar=Math.floor(Math.random()*(listapreguntas.length));
         return listapreguntas[preguntaAzar];
     }
@@ -54,9 +56,9 @@ class Partida {
     }
     // Metodo que comprueba si has ganado o perdido
     resultados(){
-        if(this.aciertos = this.ganar){
+        if(this.aciertos === this.ganar){
             return "Has ganado!!!";
-        } else if (this.fallos = this.perder){
+        } else if (this.fallos === this.perder){
             return "Has perdido!!!";
         } else {
             return "La partida está en progeso"
@@ -77,7 +79,7 @@ class Partida {
         ["¿A qué país pertenece la isla de Creta?","Grecia","Turquía","Egipto","Italia"]
     ];
     let entretenimiento = [
-        ["¿Cuál es el oso más famoso del parque nacional de Yellowstone?","El oso Yogui","EL oso Bubu","Baloo","Winnie the Pooh"]
+        ["¿Cuál es el oso más famoso del parque nacional de Yellowstone?","El oso Yogui","EL oso Bubu","Baloo","Winnie the Pooh"],
         ["¿Qué actor, que no era el feo ni el malo, era el bueno?","Clint Eastwood","Terence Hill","Robert Pattinson","Val Kilmer"],
         ["¿Con qué director de cine italiano se casó la actriz Giulietta Masina?","Federico Fellini","Vittorio de Sica","Mario Monicelli","Paolo Vasile"],
         ["¿Quién fue la gran ganadora de los Grammy Latinos 2018?","Rosalía","Medina Azahara","Camila Cabello","Rihanna"],
@@ -89,7 +91,7 @@ class Partida {
         ["¿Quién fue la primera voz de Mickey Mouse?","Walt Disney","Florentino Fernandez","James McDonald","Wayne Allwine"]
     ];
     let historia = [
-        ["¿Qué reina británica era hija de los Reyes Católicos?","Catalina de Aragón","Margaret Thatcher","Lady Di","Juana de Arco"]
+        ["¿Qué reina británica era hija de los Reyes Católicos?","Catalina de Aragón","Margaret Thatcher","Lady Di","Juana de Arco"],
         ["¿Qué país fue llamado la Galia por los romanos?","Francia","Inglaterra","Italia","Alemania"],
         ["¿Qué batalla crucial tuvo lugar en 1815?","Waterloo","Navas de Tolosa","Desembarco de Normandia","Batalla de Lepanto"],
         ["¿Cuál era la ciudad hogar de Marco Polo?","Venecia","Amedio","Florencia","Nueva York"],
@@ -101,7 +103,7 @@ class Partida {
         ["¿En qué ciudad se entrevistaron Franco y Hitler?","Hendaya","Madrid","Berlin","Nunca jamas"]
     ];
     let arteLiteratura = [
-        ["¿Qué escribía un testador?","Testamentos","Atestados","Textos","Testas"]
+        ["¿Qué escribía un testador?","Testamentos","Atestados","Textos","Testas"],
         ["¿Quién visitó un país gobernado por caballos?","Gulliver","El primer caballero","Garci","El barón de Münchhausen"],
         ["¿Cuál era el lema de los Tres Mosqueteros?","Todos para uno y uno para todos","Donde comen dos comen tres","Tanto por uno san bruno","París no cayó en una hora"],
         ["¿Qué tiene en Segovia 128 arcos?","El Acueducto","La armería","La Alhambra","El castillo de Segovia"],
@@ -113,7 +115,7 @@ class Partida {
         ["¿Qué mide en París alrededor de 333 metros?","La Torre Eiffel","La Torre de Pisa","El Miguelete","La torre de comunicaciones"]
     ];
     let cienciasNaturaleza = [
-        ["¿Cómo se llaman las células nerviosas?","Neuronas","Nervios","Plaquetas","Café"]
+        ["¿Cómo se llaman las células nerviosas?","Neuronas","Nervios","Plaquetas","Café"],
         ["¿Qué es más valioso, un brillante o un diamante?","Un brillante","Un diamante","Un zafiro","Un Ferrari"],
         ["¿Cuál es el pájaro símbolo de la paz?","Paloma","Murcielago","Oso panda","Leon"],
         ["¿En qué mes el sol está más cerca de la Tierra?","Diciembre","Agosto","Verano","Marzo"],
@@ -125,7 +127,7 @@ class Partida {
         ["¿Cuál es el dedo más sensible de la mano?","Índice","Meñique","Anular","Corazón"]
     ];
     let deportesPasatiempos = [
-        ["¿Qué pieza de ajedrez puede hacer un movimiento en forma de L?","Caballo","Torre","Reina","Borracho"]
+        ["¿Qué pieza de ajedrez puede hacer un movimiento en forma de L?","Caballo","Torre","Reina","Borracho"],
         ["¿Cómo se llaman los deportistas que practican el judo?","Judokas","Karatekas","Artistas marciales","Judenses"],
         ["¿Qué deporte practican los Harlem Globetrotters?","Baloncesto","Viajan en globo","Futbol","Beisbol"],
         ["¿A cuántos puntos se disputa un set en el tenis de mesa?","Veintiuno","Cuarenta y cinco","El mejor de tres","Dos partes de 45 minutos cada una"],
@@ -137,7 +139,7 @@ class Partida {
         ["¿Cuántos jugadores tiene un equipo de voleibol?","Seis","Once","Dos","Nueve"]
     ];
     let culturaPopular = [
-        ["¿Quién fue el primer presentador del concurso 'Un, dos, tres, responda otra vez' que se emitía en Televisión Española?","Kiko Ledgard","Mayra Gomez Kemp","Chicho Ibáñez Serrador","Chiquito de la calzada"]
+        ["¿Quién fue el primer presentador del concurso 'Un, dos, tres, responda otra vez' que se emitía en Televisión Española?","Kiko Ledgard","Mayra Gomez Kemp","Chicho Ibáñez Serrador","Chiquito de la calzada"],
         ["¿En qué popular serie de TV podemos ubicar a un personaje llamado Walter White?","En Breaking Bad","En Bonanza","En Fariña","Cuéntame como pasó"],
         ["¿Qué popular serie de Netflix nos habla sobre la vida del narcotraficante Pablo Escobar Gaviria?","Narcos","Fariña","Happy","Juego de tronos"],
         ["¿Qué actor interpreta el personaje de Leonard Hofstadter en la serie 'The Big Bang Theory'?","Johnny Galecki","Sheldon Cooper","Jim Parsons","Simon Helberg"],
@@ -149,13 +151,14 @@ class Partida {
         ["¿Qué jugador de la NBA fue pareja durante un tiempo de la popular Kim Kardashian?","Kris Humphries","Kanye West","Damon Thomas","Pau Gasol"]
     ];
         // Defino los 7 tipos de preguntas
-        let tipos = ["geografia","entretenimiento","historia","arteLiteratura","cienciasNaturaleza","deportesPasatiempos","culturaPopular"];
+        let tipos = [geografia,entretenimiento,historia,arteLiteratura,cienciasNaturaleza,deportesPasatiempos,culturaPopular];
         // Creo la lista de preguntas
         let preguntas = tipos.map(tipo=>Pregunta.generaPregunta(tipo));
         console.log(preguntas);
         let listaPreguntas=[];
         for(const pregunta in preguntas){
             listaPreguntas.push(new Pregunta(preguntas[pregunta]));
+            console.log(preguntas);
             console.log(listaPreguntas);
         }
         // Si no se gana ni pierde se continua
