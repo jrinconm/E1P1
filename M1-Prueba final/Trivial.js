@@ -149,12 +149,14 @@ class Partida {
         ["¿Qué jugador de la NBA fue pareja durante un tiempo de la popular Kim Kardashian?","Kris Humphries","Kanye West","Damon Thomas","Pau Gasol"]
     ];
         // Defino los 7 tipos de preguntas
-        const tipos = [geografia,entretenimiento,historia,arteLiteratura,cienciasNaturaleza,deportesPasatiempos,culturaPopular];
+        let tipos = ["geografia","entretenimiento","historia","arteLiteratura","cienciasNaturaleza","deportesPasatiempos","culturaPopular"];
         // Creo la lista de preguntas
         let preguntas = tipos.map(tipo=>Pregunta.generaPregunta(tipo));
+        console.log(preguntas);
         let listaPreguntas=[];
         for(const pregunta in preguntas){
             listaPreguntas.push(new Pregunta(preguntas[pregunta]));
+            console.log(listaPreguntas);
         }
         // Si no se gana ni pierde se continua
         while(this.aciertos < this.ganar && this.fallos < this.perder){
