@@ -55,7 +55,7 @@ class Partida {
     // El metodo que inicia la partida
     jugar(){
         // Defino los 7 tipos de preguntas
-        const tipos = [geografia,entretenimiento,historia];
+        const tipos = [geografia,entretenimiento,historia,arteLiteratura,cienciasNaturaleza];
         // Creo la lista de preguntas
         let preguntas = tipos.map(tipo=>Pregunta.generaPregunta(tipo));
         let listaPreguntas=[];
@@ -116,35 +116,32 @@ let historia = [
     ["¿Qué país africano fue fundado en 1847 por esclavos americanos liberados?","Liberia","Nigeria","Argelia","Madagascar"],
     ["¿En qué ciudad se entrevistaron Franco y Hitler?","Hendaya","Madrid","Berlin","Nunca jamas"]
 ];
+let arteLiteratura = [
+    ["¿Qué escribía un testador?","Testamentos","Atestados","Textos","Testas"]
+    ["¿Quién visitó un país gobernado por caballos?","Gulliver","El primer caballero","Garci","El barón de Münchhausen"],
+    ["¿Cuál era el lema de los Tres Mosqueteros?","Todos para uno y uno para todos","Donde comen dos comen tres","Tanto por uno san bruno","París no cayó en una hora"],
+    ["¿Qué tiene en Segovia 128 arcos?","El Acueducto","La armería","La Alhambra","El castillo de Segovia"],
+    ["¿Quién fue el italiano que puso música al Othelo de Shakespeare?","Verdi","Leonardo","Donatello","Splinter"],
+    ["¿Quién escribió La Guerra de los Mundos en 1898?","H.G. Wells","Orson Welles","Cervantes","Isaac Asimov"],
+    ["¿De qué asignatura fue catedrático Antonio Machado?","Francés","Literatura","Programación","Matematicas"],
+    ["¿Quién escribió las aventuras de Sandokán?","Emilio Salgari","Carlos Cuarteroni","Steve Reeves","Kabir Bedi"],
+    ["¿Cuál es la identidad secreta de Don Diego de la Vega?","El Zorro","Batman","Íñigo Montoya","Lady Bug"],
+    ["¿Qué mide en París alrededor de 333 metros?","La Torre Eiffel","La Torre de Pisa","El Miguelete","La torre de comunicaciones"]
+];
+let cienciasNaturaleza = [
+    ["¿Cómo se llaman las células nerviosas?","Neuronas","Nervios","Plaquetas","Café"]
+    ["¿Qué es más valioso, un brillante o un diamante?","Un brillante","Un diamante","Un zafiro","Un Ferrari"],
+    ["¿Cuál es el pájaro símbolo de la paz?","Paloma","Murcielago","Oso panda","Leon"],
+    ["¿En qué mes el sol está más cerca de la Tierra?","Diciembre","Agosto","Verano","Marzo"],
+    ["¿En qué parte del cuerpo se encuentra la piel más gruesa?","Espalda","Cara","Pies","Trasero"],
+    ["¿A qué le tiene miedo una persona que sufre vértigo?","A las alturas","A las vértebras","Al vaiven de los barcos","A los espacios abiertos"],
+    ["¿Cómo se llama la ciencia que estudia la sangre?","Hematología","Vampirología","Sanguinología","Venología"],
+    ["¿Qué fabricó Alessandro Volta, por primera vez, en 1800?","Pila","Voltarén","Volta a Italia","Corriente alterna"],
+    ["¿Cuál de los cinco sentidos se desarrolla el primero?","Olfato","Oido","Tacto","Gusto"],
+    ["¿Cuál es el dedo más sensible de la mano?","Índice","Meñique","Anular","Corazón"]
+];
 /*
 
-Arte y Literatura (marrón o morado)
-31. ¿Qué escribía un testador?
-32. ¿Quién visitó un país gobernado por caballos?
-33. ¿Cuál era el lema de los Tres Mosqueteros?
-34. ¿Qué tiene en Segovia 128 arcos?
-35. ¿Quién fue el italiano que puso música al Othelo de Shakespeare?
-36. ¿Quién escribió La Guerra de los Mundos en 1898?
-37. ¿De qué asignatura fue catedrático Antonio Machado?
-38. ¿Quién escribió las aventuras de Sandokán?
-39. ¿Cuál es la identidad secreta de Don Diego de la Vega?
-40. ¿Qué mide en París alrededor de 333 metros?
-Soluciones:
-31. Testamentos 32. Gulliver 33. “Todos para uno y uno para todos” 34. El Acueducto 35. Verdi 36. H.G. Wells 37. Francés 38. Emilio Salgari 39. El Zorro 40. La Torre Eiffel
-
-Ciencias y Naturaleza (verde)
-41. ¿Cómo se llaman las células nerviosas?
-42. ¿Qué es más valioso, un brillante o un diamante?
-43. ¿Cuál es el pájaro símbolo de la paz?
-44. ¿En qué mes el sol está más cerca de la Tierra?
-45. ¿En qué parte del cuerpo se encuentra la piel más gruesa?
-46. ¿A qué le tiene miedo una persona que sufre vértigo?
-47. ¿Cómo se llama la ciencia que estudia la sangre?
-48. ¿Qué fabricó Alessandro Volta, por primera vez, en 1800?
-49. ¿Cuál de los cinco sentidos se desarrolla el primero?
-50. ¿Cuál es el dedo más sensible de la mano?
-Soluciones:
-41. Neuronas 42. Un brillante 43. Paloma 44. Diciembre 45. Espalda 46. A las alturas 47. Hematología 48. Pila 49. Olfato 50. Índice
 
 Deportes y Pasatiempos (naranja)
 51. ¿Qué pieza de ajedrez puede hacer un movimiento en forma de L?
