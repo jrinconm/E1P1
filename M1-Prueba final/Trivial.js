@@ -47,7 +47,7 @@ class Partida {
     // Inicializo los valores
     constructor (){
         // Parametrizo los valores para victoria y derrota
-        this.ganar=6;
+        this.ganar=4;
         this.perder=3;
         this.aciertos=0;
         this.fallos=0;        
