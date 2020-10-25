@@ -23,6 +23,10 @@ function creaFila(objeto,tipoCelda,valor){
     }
     return fila
 }
+function hospitalesMuestra(hospitales){
+    for(const hospital in hospitales){
+    }
+}
 function creaFilaObjeto(objeto,tipoCelda,valor){
     let fila = document.createElement("tr");
     for(const propiedad in objeto){
@@ -102,69 +106,79 @@ function insertaTabla(objeto,div){
 function click(ev){
     // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
     window[ev.target.name]();
-    muestraDatos();
+    //muestraDatos();
 }
-function adicionarpaciente(){
+function pacienteAlta(){
     hospital.personal[0].addPaciente("Jose","Infarto");
+}
+function personalAlta(){
+    hospital.addPersonal(new Personal("Pepe","medico"))
+}
+function hospitalAlta(){
+    addhospital(hospitales);
+}
+function hospitalMostrar(){
+    if (!document.getElementById("visualizacion"+"hospital")){
+        let div = document.createElement("div");
+        div.setAttribute("id", "visualizacion"+"hospital");
+        document.getElementById("hospital").append(div);
+    }
+    document.getElementById("visualizacion"+"hospital").innerHTML="";
+    let tabla=creaTablaObjeto(hospitales);
+    document.getElementById("visualizacion"+"hospital").append(tabla);    
 }
 function cargaDatos(){
-    let hospital=new Hospital("El consuelo","Valencia","Pepe");
-    hospital.addPersonal(new Personal("Pepe","medico"))
-    hospital.addPersonal(new Personal("Juan","celador"))
-    hospital.addPersonal(new Personal("Jose","enfermero"))
-    hospital.personal[0].addPaciente("Jose","Infarto");
-    hospital.personal[1].addPaciente("Jose2","Infarto2");
-    return hospital;
+    let hospitales=[];
+    addhospital(hospitales);
+    let hospital=hospitales[0];
+    return hospitales;
 }
-function boton(ev){
-    console.log(ev);
-}
-function addhospital(){
-    let hospital=new Hospital("El consuelo","Valencia","Pepe");
+function addhospital(hospitales){
+    hospitales.push(new Hospital("El consuelo","Valencia","Pepe"));
+    return hospitales;
 }
 function creaboton(tipo, elemento){
     let boton = document.createElement("button");
-    boton.setAttribute("name", tipo + elemento);
-    document.body.appendChild(boton);
+    boton.setAttribute("name", elemento+tipo); 
+    boton.setAttribute("class", tipo); 
+    document.getElementById(elemento).appendChild(boton);
+    //document.body.appendChild(boton);
     boton.innerText=tipo + " " +elemento;
     boton.addEventListener("click",click,false);
 }
-function muestraDatos(){   
-    cargaDatos(hospital);
-    document.body.innerHTML="";
-    let div = document.createElement("div");
-    div.setAttribute("id", "visualizacion");
-    document.body.appendChild(div);
-/*
-    let boton = document.createElement("button");
-    boton.setAttribute("name", "nuevoPaciente");
-    document.body.appendChild(boton);
-    boton.innerText="Añadir Paciente";
-    boton.addEventListener("click",addPaciente,false);
-*/
-    let tipos=["adicionar","actualizar","eliminar","borrar"];
+function muestraDatos(){  
+    //document.body.innerHTML="";
+    //document.body.appendChild(div);
+    let tipos=["Alta","Modificar","Baja","Mostrar"];
     let clases=["hospital","personal","paciente"]
     for(const clase in clases){
         let div = document.createElement("div");
         div.setAttribute("id", clases[clase]);
         document.body.appendChild(div);
+        let cabecera=creaCabecera(clases[clase]);
+        document.getElementById(clases[clase]).appendChild(cabecera);
         for(const tipo in tipos){
-            creaboton(tipos[tipo], clases[clase])
+            creaboton(tipos[tipo],clases[clase])
         }
     }
-    //inserción, modificación, borrado, visualización
-    // Muestro la tabla con los datos del hospital
-
+    /*
     // Muestro la tabla con los datos del personal
-    let cabecera=creaCabecera("Personal");
+    let cabecera=creaCabecera("Hospital");
+    document.getElementById("visualizacion").appendChild(cabecera);  
+    let tabla=creaTablaObjeto(hospitales);
+    document.getElementById("visualizacion").appendChild(tabla);    
+    // Muestro la tabla con los datos del personal
+    cabecera=creaCabecera("Personal");
     document.getElementById("visualizacion").appendChild(cabecera);
-    let tabla=creaTablaObjeto(hospital.personal);
+    tabla=creaTablaObjeto(hospital.personal);
     document.getElementById("visualizacion").appendChild(tabla);
     // Muestro la tabla con los datos de los pacientes
 
-//   insertaCabeceraYTabla("Pacientes",paciente1);
-    document.getElementById("visualizacion").style = "overflow-x:auto";
+    //   insertaCabeceraYTabla("Pacientes",paciente1);
+    */
+    
 }
-let hospital=cargaDatos();
+//let hospitales=cargaDatos();
+//let hospital=hospitales[0];
+let hospitales=[];
 window.onload=muestraDatos;
-//document.getElementById("Add").addEventListener("click",addPaciente,false);
