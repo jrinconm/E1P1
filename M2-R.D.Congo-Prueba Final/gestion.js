@@ -73,12 +73,43 @@ function creaTablaObjeto(objetos){
     tabla.appendChild(cuerpoTabla);
     return tabla;
 }
-// Funcion que crea una cabecera H1 con "texto" y la deja lista para añadir
+// Funcion que crea un formulario
+function creaFormulario(objeto){
+    let formulario = document.createElement("form");
+    for(const propiedad in objeto){
+        let label=document.createElement("label"); 
+        label.innerText=objeto[propiedad]+": ";
+        formulario.appendChild(label);
+        let entrada = document.createElement("input"); 
+        entrada.setAttribute("type", "text"); 
+        entrada.setAttribute("name", objeto[propiedad]); 
+        formulario.appendChild(entrada);
+        let br = document.createElement("br"); 
+        formulario.appendChild(br);  
+    }  
+    let enviar = document.createElement("input");
+    enviar.setAttribute('type',"submit");
+    enviar.setAttribute('value',"Submit");
+    formulario.appendChild(enviar);
+    return formulario;  
+}
+// Funcion que crea una cabecera (por defecto H1) con "texto" y la deja lista para añadir
 function creaCabecera(texto,tipo="h1"){
     let cabecera = document.createElement(tipo);
     let textoCabecera = document.createTextNode(texto);
     cabecera.appendChild(textoCabecera);
     return cabecera;
+}
+// Inicializa el div que muestra un elemento (las clases)
+function creaBorraDiv(elemento){
+    // Si no existe el div lo creo
+    if (!document.getElementById("visualizacion"+elemento)){
+        let div = document.createElement("div");
+        div.setAttribute("id", "visualizacion"+elemento);
+        document.getElementById(elemento).append(div);
+    }
+    // Borro el contenido del div 
+    document.getElementById("visualizacion"+elemento).innerHTML="";
 }
 // Funcion para ejecutar cuando se hace click
 // Ejecuta una funcion basada en la lista de funciones de window
@@ -87,33 +118,37 @@ function click(ev){
     window[ev.target.name]();
 }
 function pacienteAlta(){
-    hospitales[0].personal[0].addPaciente("Jose","Infarto");
+    // Borro y creo el div de paciente
+    creaBorraDiv("paciente");
+    let propiedades=["Nombre","Enfermedad","Hospital","Personal"];
+    let formulario = creaFormulario(propiedades);
+    document.getElementById("visualizacion"+"paciente").appendChild(formulario);    
+    //hospitales[0].personal[0].addPaciente(new Paciente("Jose","Infarto"));
 }
 function personalAlta(){
-    hospitales[0].addPersonal(new Personal("Pepe","medico"))
+    // Borro y creo el div de personal
+    creaBorraDiv("personal");
+    let propiedades=["Nombre","Especialidad","Hospital"];
+    let formulario = creaFormulario(propiedades);
+    document.getElementById("visualizacion"+"personal").appendChild(formulario);
 }
 function hospitalAlta(){
+    creaBorraDiv("hospital");
+    let propiedades=["Nombre","Localidad","Responsable"];
+    let formulario = creaFormulario(propiedades);
+    document.getElementById("visualizacion"+"hospital").appendChild(formulario);
+
     hospitales.push(new Hospital("El consuelo","Valencia","Pepe"));
 }
 function hospitalMostrar(){
-    if (!document.getElementById("visualizacion"+"hospital")){
-        let div = document.createElement("div");
-        div.setAttribute("id", "visualizacion"+"hospital");
-        document.getElementById("hospital").append(div);
-    }
-    document.getElementById("visualizacion"+"hospital").innerHTML="";
+    // Borro y creo el div de personal
+    creaBorraDiv("hospital");
     let tabla=creaTablaObjeto(hospitales);
     document.getElementById("visualizacion"+"hospital").append(tabla);    
 }
 function personalMostrar(){
-    // Si no existe el div lo creo
-    if (!document.getElementById("visualizacion"+"personal")){
-        let div = document.createElement("div");
-        div.setAttribute("id", "visualizacion"+"personal");
-        document.getElementById("personal").append(div);
-    }
-    // Borro el contenido del div 
-    document.getElementById("visualizacion"+"personal").innerHTML="";
+    // Borro y creo el div de personal
+    creaBorraDiv("personal");
     // Hago un bucle para revisar el personal de cada hospital
     for (const hospital in hospitales){
         let elemento=document.getElementById("visualizacion"+"personal");
