@@ -15,17 +15,13 @@ function creaFila(objeto,tipoCelda,valor){
                 let textoCelda = document.createTextNode(propiedad);
                 celda.appendChild(textoCelda);
             }
-            celda.style.textTransform = "capitalize";
+            //celda.style.textTransform = "capitalize";
             fila.appendChild(celda);
         } else {
             //fila=creaFila(objeto[propiedad],tipoCelda,valor);
         }
     }
     return fila
-}
-function hospitalesMuestra(hospitales){
-    for(const hospital in hospitales){
-    }
 }
 function creaFilaObjeto(objeto,tipoCelda,valor){
     let fila = document.createElement("tr");
@@ -48,6 +44,7 @@ function creaFilaObjeto(objeto,tipoCelda,valor){
     }
     return fila
 }
+
 function creaTabla(objeto){
     // Creo una tabla
     let tabla=document.createElement("table");
@@ -68,10 +65,11 @@ function creaTablaObjeto(objetos){
     let tabla=document.createElement("table");
     let cuerpoTabla=document.createElement("tbody");
     // La primera fila es la cabecera
-    let filaObjeto = creaFilaObjeto(objetos[0],"th");
+    let filaObjeto = creaFila(objetos[0],"th");
     cuerpoTabla.appendChild(filaObjeto);
     for(let objeto in objetos){
-        cuerpoTabla.appendChild(creaFilaObjeto(objetos[objeto],"td",true));
+        cuerpoTabla.appendChild(creaFila(objetos[objeto],"td",true));
+        //cuerpoTabla.appendChild(creaFilaObjeto(objetos[objeto],"td",true));
     }
     tabla.appendChild(cuerpoTabla);
     return tabla;
@@ -88,12 +86,14 @@ function creaTablaSinCabecera(objeto){
     // Devuelvo la tabla
     return tabla;
 }
+// Funcion que crea una cabecera H1 con "texto" y la deja lista para añadir
 function creaCabecera(texto){
     let cabecera = document.createElement("h1");
     let textoCabecera = document.createTextNode(texto);
     cabecera.appendChild(textoCabecera);
     return cabecera;
 }
+/*
 function insertaCabeceraYTabla(nombreObjeto,objeto){
     let cabecera = creaCabecera(nombreObjeto);
     document.getElementById("visualizacion").appendChild(cabecera);
@@ -103,19 +103,19 @@ function insertaTabla(objeto,div){
     let tabla=creaTabla(objeto);
     div.appendChild(tabla);
 }
+*/
 function click(ev){
     // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
     window[ev.target.name]();
-    //muestraDatos();
 }
 function pacienteAlta(){
-    hospital.personal[0].addPaciente("Jose","Infarto");
+    hospitales[0].personal[0].addPaciente("Jose","Infarto");
 }
 function personalAlta(){
-    hospital.addPersonal(new Personal("Pepe","medico"))
+    hospitales[0].addPersonal(new Personal("Pepe","medico"))
 }
 function hospitalAlta(){
-    addhospital(hospitales);
+    hospitales.push(new Hospital("El consuelo","Valencia","Pepe"));
 }
 function hospitalMostrar(){
     if (!document.getElementById("visualizacion"+"hospital")){
@@ -127,14 +127,28 @@ function hospitalMostrar(){
     let tabla=creaTablaObjeto(hospitales);
     document.getElementById("visualizacion"+"hospital").append(tabla);    
 }
+function personalMostrar(){
+    if (!document.getElementById("visualizacion"+"personal")){
+        let div = document.createElement("div");
+        div.setAttribute("id", "visualizacion"+"personal");
+        document.getElementById("personal").append(div);
+    }
+    document.getElementById("visualizacion"+"personal").innerHTML="";
+    for (const hospital in hospitales){
+        let elemento=document.getElementById("visualizacion"+"personal");
+        let cabecera = document.createElement("h2");
+        let textoCabecera = document.createTextNode("Hospital: " + hospitales[hospital].nombre + " tiene el siguiente personal:");
+        elemento.appendChild(textoCabecera);
+        let tabla=creaTablaObjeto(hospitales[hospital].personal)
+        elemento.append(tabla); 
+    }
+    //let tabla=creaTablaObjeto(personal);
+    //document.getElementById("visualizacion"+"personal").append(tabla);    
+}
 function cargaDatos(){
     let hospitales=[];
     addhospital(hospitales);
     let hospital=hospitales[0];
-    return hospitales;
-}
-function addhospital(hospitales){
-    hospitales.push(new Hospital("El consuelo","Valencia","Pepe"));
     return hospitales;
 }
 function creaboton(tipo, elemento){
@@ -161,22 +175,6 @@ function muestraDatos(){
             creaboton(tipos[tipo],clases[clase])
         }
     }
-    /*
-    // Muestro la tabla con los datos del personal
-    let cabecera=creaCabecera("Hospital");
-    document.getElementById("visualizacion").appendChild(cabecera);  
-    let tabla=creaTablaObjeto(hospitales);
-    document.getElementById("visualizacion").appendChild(tabla);    
-    // Muestro la tabla con los datos del personal
-    cabecera=creaCabecera("Personal");
-    document.getElementById("visualizacion").appendChild(cabecera);
-    tabla=creaTablaObjeto(hospital.personal);
-    document.getElementById("visualizacion").appendChild(tabla);
-    // Muestro la tabla con los datos de los pacientes
-
-    //   insertaCabeceraYTabla("Pacientes",paciente1);
-    */
-    
 }
 //let hospitales=cargaDatos();
 //let hospital=hospitales[0];

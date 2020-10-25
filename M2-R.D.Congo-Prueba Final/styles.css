@@ -21,6 +21,9 @@ button {
 .Baja {
     background-color: red;  
 }
-div {
+div ::first-letter{
+    text-transform: capitalize;
+}
+table ::first-letter{
     text-transform: capitalize;
 }
