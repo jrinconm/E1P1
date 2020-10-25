@@ -19,7 +19,6 @@ function creaFila(objeto,tipoCelda,valor){
             fila.appendChild(celda);
         } else {
             //fila=creaFila(objeto[propiedad],tipoCelda,valor);
-            console.log(fila);
         }
     }
     return fila
@@ -65,7 +64,7 @@ function creaTablaObjeto(objetos){
     let tabla=document.createElement("table");
     let cuerpoTabla=document.createElement("tbody");
     // La primera fila es la cabecera
-    let filaObjeto = creaFila(objetos[0],"th");
+    let filaObjeto = creaFilaObjeto(objetos[0],"th");
     cuerpoTabla.appendChild(filaObjeto);
     for(let objeto in objetos){
         cuerpoTabla.appendChild(creaFilaObjeto(objetos[objeto],"td",true));
@@ -104,7 +103,17 @@ function addPaciente(){
     hospital.personal[0].addPaciente("Jose","Infarto");
     muestraDatos();
 }
-function muestraDatos(){
+function cargaDatos(){
+    let hospital=new Hospital("El consuelo","Valencia","Pepe");
+    hospital.addPersonal(new Personal("Pepe","medico"))
+    hospital.addPersonal(new Personal("Juan","celador"))
+    hospital.addPersonal(new Personal("Jose","enfermero"))
+    hospital.personal[0].addPaciente("Jose","Infarto");
+    hospital.personal[1].addPaciente("Jose2","Infarto2");
+    return hospital;
+}
+function muestraDatos(){   
+    cargaDatos(hospital);
     document.body.innerHTML="";
     let div = document.createElement("div");
     div.setAttribute("id", "visualizacion");
@@ -121,18 +130,11 @@ function muestraDatos(){
     document.getElementById("visualizacion").appendChild(cabecera);
     let tabla=creaTablaObjeto(hospital.personal);
     document.getElementById("visualizacion").appendChild(tabla);
-    // Muestro la tabla con los datos de lños pacientes
+    // Muestro la tabla con los datos de los pacientes
 
 //   insertaCabeceraYTabla("Pacientes",paciente1);
     document.getElementById("visualizacion").style = "overflow-x:auto";
 }
-let hospital=new Hospital("El consuelo","Valencia","Pepe");
-hospital.addPersonal(new Personal("Pepe","medico"))
-hospital.addPersonal(new Personal("Juan","celador"))
-hospital.addPersonal(new Personal("Jose","enfermero"))
-hospital.personal[0].addPaciente("Jose","Infarto");
-hospital.personal[0].addPaciente("Jose2","Infarto2");
-hospital.personal[1].addPaciente("Jose","Infarto");
-hospital.personal[1].addPaciente("Jose2","Infarto2");
+let hospital=cargaDatos();
 window.onload=muestraDatos;
 //document.getElementById("Add").addEventListener("click",addPaciente,false);
