@@ -59,8 +59,8 @@ function muestraDatos(){
     document.getElementById("visualizacion").style = "overflow-x:auto";
 }
 let hospital=new Hospital("El consuelo","Valencia","Pepe");
-let personal1=new Personal("Pepe","medico",hospital);
-let paciente1=new Paciente("Jose","Infarto",personal1);
-let personal2=new Personal("Pepe2","medico2",hospital);
-let paciente2=new Paciente("Jose2","Infarto2",personal1);
+//let personal1=new Personal("Pepe","medico",hospital);
+//let paciente1=new Paciente("Jose","Infarto",personal1);
+//let personal2=new Personal("Pepe2","medico2",hospital);
+//let paciente2=new Paciente("Jose2","Infarto2",personal1);
 window.onload=muestraDatos;
