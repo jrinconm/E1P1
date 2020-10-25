@@ -7,15 +7,14 @@ function creaFila(objeto,tipoCelda,valor){
         let celda = document.createElement(tipoCelda);
         if(valor){
             let textoCelda;
-            // Compruebo si es otro objeto, si lo es, muestro el nombre
-            if(typeof objeto[propiedad] === 'object'){
-                textoCelda = document.createTextNode(objeto[propiedad]["nombre"]);
-            } else {
+            // Compruebo si es otro objeto, si lo es, no hago nada
+            if(typeof objeto[propiedad] !== 'object'){
                 textoCelda = document.createTextNode(objeto[propiedad]);
+                celda.appendChild(textoCelda);
+                celda.style.textTransform = "capitalize";
+                fila.appendChild(celda);
             }
-            celda.appendChild(textoCelda);
-            celda.style.textTransform = "capitalize";
-            fila.appendChild(celda);
+
         } else {
             let textoCelda = document.createTextNode(propiedad);
             celda.appendChild(textoCelda);
@@ -54,8 +53,8 @@ function insertaCabeceraYTabla(nombreObjeto,objeto){
 }
 function muestraDatos(){
     insertaCabeceraYTabla("Hospital",hospital);
-    insertaCabeceraYTabla("Personal",personal1);
-    insertaCabeceraYTabla("Pacientes",paciente1);
+//    insertaCabeceraYTabla("Personal",personal1);
+//   insertaCabeceraYTabla("Pacientes",paciente1);
     document.getElementById("visualizacion").style = "overflow-x:auto";
 }
 let hospital=new Hospital("El consuelo","Valencia","Pepe");
