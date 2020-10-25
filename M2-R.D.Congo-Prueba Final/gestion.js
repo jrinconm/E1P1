@@ -99,9 +99,13 @@ function insertaTabla(objeto,div){
     let tabla=creaTabla(objeto);
     div.appendChild(tabla);
 }
-function addPaciente(){
-    hospital.personal[0].addPaciente("Jose","Infarto");
+function click(ev){
+    // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
+    window[ev.target.name]();
     muestraDatos();
+}
+function adicionarpaciente(){
+    hospital.personal[0].addPaciente("Jose","Infarto");
 }
 function cargaDatos(){
     let hospital=new Hospital("El consuelo","Valencia","Pepe");
@@ -112,19 +116,45 @@ function cargaDatos(){
     hospital.personal[1].addPaciente("Jose2","Infarto2");
     return hospital;
 }
+function boton(ev){
+    console.log(ev);
+}
+function addhospital(){
+    let hospital=new Hospital("El consuelo","Valencia","Pepe");
+}
+function creaboton(tipo, elemento){
+    let boton = document.createElement("button");
+    boton.setAttribute("name", tipo + elemento);
+    document.body.appendChild(boton);
+    boton.innerText=tipo + " " +elemento;
+    boton.addEventListener("click",click,false);
+}
 function muestraDatos(){   
     cargaDatos(hospital);
     document.body.innerHTML="";
     let div = document.createElement("div");
     div.setAttribute("id", "visualizacion");
     document.body.appendChild(div);
+/*
     let boton = document.createElement("button");
-    //boton.setAttribute("name", "Add");
+    boton.setAttribute("name", "nuevoPaciente");
     document.body.appendChild(boton);
-    boton.innerText="Boton";
+    boton.innerText="Añadir Paciente";
     boton.addEventListener("click",addPaciente,false);
+*/
+    let tipos=["adicionar","actualizar","eliminar","borrar"];
+    let clases=["hospital","personal","paciente"]
+    for(const clase in clases){
+        let div = document.createElement("div");
+        div.setAttribute("id", clases[clase]);
+        document.body.appendChild(div);
+        for(const tipo in tipos){
+            creaboton(tipos[tipo], clases[clase])
+        }
+    }
+    //inserción, modificación, borrado, visualización
     // Muestro la tabla con los datos del hospital
-    insertaCabeceraYTabla("Hospital",hospital);
+
     // Muestro la tabla con los datos del personal
     let cabecera=creaCabecera("Personal");
     document.getElementById("visualizacion").appendChild(cabecera);
