@@ -9,8 +9,8 @@ function creaFila(objeto,tipoCelda,valor){
         if(typeof objeto[propiedad] !== 'object'){
             if(valor){
                 let textoCelda;
-                    textoCelda = document.createTextNode(objeto[propiedad]);
-                    celda.appendChild(textoCelda);
+                textoCelda = document.createTextNode(objeto[propiedad]);
+                celda.appendChild(textoCelda);
             } else {
                 let textoCelda = document.createTextNode(propiedad);
                 celda.appendChild(textoCelda);
@@ -33,18 +33,17 @@ function creaFilaObjeto(objeto,tipoCelda,valor){
             let textoCelda;
                 textoCelda = document.createTextNode(objeto[propiedad]);
                 celda.appendChild(textoCelda);
-                celda.style.textTransform = "capitalize";
+                //celda.style.textTransform = "capitalize";
                 fila.appendChild(celda);
         } else {
             let textoCelda = document.createTextNode(propiedad);
             celda.appendChild(textoCelda);
-            celda.style.textTransform = "capitalize";
+            //celda.style.textTransform = "capitalize";
             fila.appendChild(celda);
         }
     }
     return fila
 }
-
 function creaTabla(objeto){
     // Creo una tabla
     let tabla=document.createElement("table");
@@ -74,36 +73,15 @@ function creaTablaObjeto(objetos){
     tabla.appendChild(cuerpoTabla);
     return tabla;
 }
-function creaTablaSinCabecera(objeto){
-    // Creo una tabla
-    let tabla=document.createElement("table");
-    let cuerpoTabla=document.createElement("tbody");
-    // La segunda fila son los valores. Indico true para que recoja los valores
-    let fila = creaFila(objeto,"td",true);
-    cuerpoTabla.appendChild(fila);
-    // Añado el cuerpo a la tabla
-    tabla.appendChild(cuerpoTabla);
-    // Devuelvo la tabla
-    return tabla;
-}
 // Funcion que crea una cabecera H1 con "texto" y la deja lista para añadir
-function creaCabecera(texto){
-    let cabecera = document.createElement("h1");
+function creaCabecera(texto,tipo="h1"){
+    let cabecera = document.createElement(tipo);
     let textoCabecera = document.createTextNode(texto);
     cabecera.appendChild(textoCabecera);
     return cabecera;
 }
-/*
-function insertaCabeceraYTabla(nombreObjeto,objeto){
-    let cabecera = creaCabecera(nombreObjeto);
-    document.getElementById("visualizacion").appendChild(cabecera);
-    insertaTabla(objeto,document.getElementById("visualizacion"))
-}
-function insertaTabla(objeto,div){
-    let tabla=creaTabla(objeto);
-    div.appendChild(tabla);
-}
-*/
+// Funcion para ejecutar cuando se hace click
+// Ejecuta una funcion basada en la lista de funciones de window
 function click(ev){
     // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
     window[ev.target.name]();
@@ -128,29 +106,28 @@ function hospitalMostrar(){
     document.getElementById("visualizacion"+"hospital").append(tabla);    
 }
 function personalMostrar(){
+    // Si no existe el div lo creo
     if (!document.getElementById("visualizacion"+"personal")){
         let div = document.createElement("div");
         div.setAttribute("id", "visualizacion"+"personal");
         document.getElementById("personal").append(div);
     }
+    // Borro el contenido del div 
     document.getElementById("visualizacion"+"personal").innerHTML="";
+    // Hago un bucle para revisar el personal de cada hospital
     for (const hospital in hospitales){
         let elemento=document.getElementById("visualizacion"+"personal");
-        let cabecera = document.createElement("h2");
-        let textoCabecera = document.createTextNode("Hospital: " + hospitales[hospital].nombre + " tiene el siguiente personal:");
-        elemento.appendChild(textoCabecera);
+        let texto="El hospital: " + hospitales[hospital].nombre + " tiene el siguiente personal:";
+        let cabecera = creaCabecera(texto,"h2");
+        elemento.append(cabecera);
         let tabla=creaTablaObjeto(hospitales[hospital].personal)
         elemento.append(tabla); 
-    }
-    //let tabla=creaTablaObjeto(personal);
-    //document.getElementById("visualizacion"+"personal").append(tabla);    
+    } 
 }
-function cargaDatos(){
-    let hospitales=[];
-    addhospital(hospitales);
-    let hospital=hospitales[0];
-    return hospitales;
-}
+/* Creo un boton combinando:
+Tipo(alta, baja, modificacion y mostrar) y Elemento(hospita, personal, paciente)
+El nombre del boton combina elemento+tipo y llama a una funcion llamada click
+*/
 function creaboton(tipo, elemento){
     let boton = document.createElement("button");
     boton.setAttribute("name", elemento+tipo); 
@@ -160,9 +137,8 @@ function creaboton(tipo, elemento){
     boton.innerText=tipo + " " +elemento;
     boton.addEventListener("click",click,false);
 }
+// Carga la pantalla inicial
 function muestraDatos(){  
-    //document.body.innerHTML="";
-    //document.body.appendChild(div);
     let tipos=["Alta","Modificar","Baja","Mostrar"];
     let clases=["hospital","personal","paciente"]
     for(const clase in clases){
@@ -176,7 +152,6 @@ function muestraDatos(){
         }
     }
 }
-//let hospitales=cargaDatos();
-//let hospital=hospitales[0];
+// Inicializo los hospitales comunes para todo el programa
 let hospitales=[];
 window.onload=muestraDatos;
