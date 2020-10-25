@@ -1,7 +1,4 @@
 "use strict";
-var hospital=new Hospital("El consuelo","Valencia","Pepe");
-var personal1=new Personal("Pepe","medico",hospital);
-var paciente1=new Paciente("Jose","Infarto",personal1);
 // Recorre un objeto para crear una fila
 // Si valor es true, quiero los valores del objeto
 function creaFila(objeto,tipoCelda,valor){
@@ -43,12 +40,27 @@ function creaTabla(objeto){
     // Devuelvo la tabla
     return tabla;
 }
-function muestraDatos(){
-    let tabla=creaTabla(hospital);
-    document.getElementById("visualizacion").appendChild(tabla);
-    tabla=creaTabla(personal1);
-    document.getElementById("visualizacion").appendChild(tabla);
-    tabla=creaTabla(paciente1);
+function creaCabecera(texto){
+    let cabecera = document.createElement("h1");
+    let textoCabecera = document.createTextNode(texto);
+    cabecera.appendChild(textoCabecera);
+    return cabecera;
+}
+function insertaCabeceraYTabla(nombreObjeto,objeto){
+    let cabecera = creaCabecera(nombreObjeto);
+    document.getElementById("visualizacion").appendChild(cabecera);
+    let tabla=creaTabla(objeto);
     document.getElementById("visualizacion").appendChild(tabla);
 }
+function muestraDatos(){
+    insertaCabeceraYTabla("Hospital",hospital);
+    insertaCabeceraYTabla("Personal",personal1);
+    insertaCabeceraYTabla("Pacientes",paciente1);
+    document.getElementById("visualizacion").style = "overflow-x:auto";
+}
+let hospital=new Hospital("El consuelo","Valencia","Pepe");
+let personal1=new Personal("Pepe","medico",hospital);
+let paciente1=new Paciente("Jose","Infarto",personal1);
+let personal2=new Personal("Pepe2","medico2",hospital);
+let paciente2=new Paciente("Jose2","Infarto2",personal1);
 window.onload=muestraDatos;
