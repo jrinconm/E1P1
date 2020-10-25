@@ -9,7 +9,13 @@ function creaFila(objeto,tipoCelda,valor){
     for(const propiedad in objeto){
         let celda = document.createElement(tipoCelda);
         if(valor){
-            let textoCelda = document.createTextNode(objeto[propiedad]);
+            let textoCelda;
+            // Compruebo si es otro objeto, si lo es, muestro el nombre
+            if(typeof objeto[propiedad] === 'object'){
+                textoCelda = document.createTextNode(objeto[propiedad]["nombre"]);
+            } else {
+                textoCelda = document.createTextNode(objeto[propiedad]);
+            }
             celda.appendChild(textoCelda);
             celda.style.textTransform = "capitalize";
             fila.appendChild(celda);
