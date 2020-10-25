@@ -73,24 +73,51 @@ function creaTablaObjeto(objetos){
     tabla.appendChild(cuerpoTabla);
     return tabla;
 }
+// Funcion que crea una entrada de formulario
+function creaEntradaFormulario(nombre){
+    let entrada = document.createElement("input"); 
+    entrada.setAttribute("type", "text"); 
+    entrada.setAttribute("name", nombre);
+    return entrada;
+}
+function creaListaFormulario(nombre,listado){
+    let entrada = document.createElement("select"); 
+    entrada.setAttribute("name", nombre);
+    for(const opcion in listado){
+        var item = document.createElement("option");
+        item.text = listado[opcion].nombre;
+        item.value = listado[opcion].nombre;
+        entrada.add(item);
+    }
+    return entrada;
+}
+function creaLabelFormulario(nombre){
+    let label=document.createElement("label"); 
+    label.innerText=nombre+": ";
+    return label;
+}
 // Funcion que crea un formulario
-function creaFormulario(objeto){
+function creaFormulario(objeto,div){
     let formulario = document.createElement("form");
     for(const propiedad in objeto){
-        let label=document.createElement("label"); 
-        label.innerText=objeto[propiedad]+": ";
+        let label=creaLabelFormulario(objeto[propiedad]);
         formulario.appendChild(label);
-        let entrada = document.createElement("input"); 
-        entrada.setAttribute("type", "text"); 
-        entrada.setAttribute("name", objeto[propiedad]); 
+        let entrada=creaEntradaFormulario(objeto[propiedad]);
         formulario.appendChild(entrada);
         let br = document.createElement("br"); 
         formulario.appendChild(br);  
-    }  
+    } 
+    if (div=="visualizacion"+"personal"){
+        let label=creaLabelFormulario("Hospital");
+        formulario.appendChild(label);
+        let entrada=creaListaFormulario("Hospital",hospitales);
+        formulario.appendChild(entrada);
+    }    
     let enviar = document.createElement("input");
     enviar.setAttribute('type',"submit");
     enviar.setAttribute('value',"Submit");
     formulario.appendChild(enviar);
+    document.getElementById(div).appendChild(formulario);    
     return formulario;  
 }
 // Funcion que crea una cabecera (por defecto H1) con "texto" y la deja lista para añadir
@@ -121,30 +148,25 @@ function pacienteAlta(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");
     let propiedades=["Nombre","Enfermedad","Hospital","Personal"];
-    let formulario = creaFormulario(propiedades);
-    document.getElementById("visualizacion"+"paciente").appendChild(formulario);    
+    creaFormulario(propiedades,"visualizacion"+"paciente");    
     //hospitales[0].personal[0].addPaciente(new Paciente("Jose","Infarto"));
 }
 function personalAlta(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");
     let propiedades=["Nombre","Especialidad","Hospital"];
-    let formulario = creaFormulario(propiedades);
-    document.getElementById("visualizacion"+"personal").appendChild(formulario);
+    creaFormulario(propiedades,"visualizacion"+"personal");    
 }
 function hospitalAlta(){
     creaBorraDiv("hospital");
     let propiedades=["Nombre","Localidad","Responsable"];
-    let formulario = creaFormulario(propiedades);
-    document.getElementById("visualizacion"+"hospital").appendChild(formulario);
-
-    hospitales.push(new Hospital("El consuelo","Valencia","Pepe"));
+    creaFormulario(propiedades,"visualizacion"+"hospital");   
+    //hospitales.push(new Hospital("El consuelo","Valencia","Pepe"));
 }
 function hospitalMostrar(){
     // Borro y creo el div de personal
     creaBorraDiv("hospital");
-    let tabla=creaTablaObjeto(hospitales);
-    document.getElementById("visualizacion"+"hospital").append(tabla);    
+    creaTablaObjeto(hospitales,"visualizacion"+"hospital");    
 }
 function personalMostrar(){
     // Borro y creo el div de personal
@@ -158,6 +180,11 @@ function personalMostrar(){
         let tabla=creaTablaObjeto(hospitales[hospital].personal)
         elemento.append(tabla); 
     } 
+}
+function pacienteMostrar(){
+    // Borro y creo el div de personal
+    creaBorraDiv("paciente");
+    creaTablaObjeto(hospitales,"visualizacion"+"paciente");    
 }
 /* Creo un boton combinando:
 Tipo(alta, baja, modificacion y mostrar) y Elemento(hospita, personal, paciente)
