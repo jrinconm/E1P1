@@ -9,8 +9,7 @@ function click(ev){
 function submit(ev){
     ev.preventDefault();
     let formulario=ev.target.parentNode;
-    if(compruebaFormulario(formulario)){
-        console.log(ev.target.className);
+    if(compruebaFormulario(formulario)){        
         // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
         window["darAlta"+ev.target.className](ev.target.parentNode);
     }
@@ -29,7 +28,7 @@ function pacienteAlta(){
 function personalAlta(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");
-    let propiedades=["Nombre","Especialidad","Hospital"];
+    let propiedades=["Nombre"];
     creaFormulario(propiedades,"visualizacion"+"personal");    
 }
 //Funcion al hacer click en Alta hospital

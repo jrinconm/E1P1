@@ -1,11 +1,9 @@
 "use strict";
 // Funcion que comprueba los campos de un formulario
 function compruebaFormulario(formulario){
-    // Primero compruebo las listas
-    //validaLista();
-    // Compruebo los input de tipo text
     let campos=formulario.elements;    
     for(const campo in campos){
+        // Compruebo los input de tipo text
         if(campos[campo].type=="text"){
             if(campos[campo].value.length == 0){
                 alert("Debes introducir "+campos[campo].name)
@@ -13,6 +11,11 @@ function compruebaFormulario(formulario){
                 //Devuelvo falso              
                 return false;
             }
+        }
+        // Compruebo los input de tipo select one
+        if(campos[campo].type=="select-one" && campos[campo].options.length==0){
+                alert("Debes crear primero un "+campos[campo].name);
+                return false;
         }
     }
     // Si llego hasta aquí es que todo ha ido bien
@@ -27,25 +30,43 @@ function creaEntradaFormulario(nombre){
     entrada.setAttribute("class", "entradaTexto");
     return entrada;
 }
-function creaListaFormulario(nombre,listado){
+function creaListaFormulario(nombre,listado,array){
     let entrada = document.createElement("select"); 
     entrada.setAttribute("name", nombre);
     entrada.setAttribute("id", nombre);
     entrada.setAttribute("class", "entradaLista");
-    for(const opcion in listado){
-        var item = document.createElement("option");
-        item.text = listado[opcion].nombre;
-        item.value = listado[opcion].nombre;
-        entrada.add(item);
+    if(array){
+        for(const opcion in listado){
+            var item = document.createElement("option");
+            item.text = listado[opcion];
+            item.value = listado[opcion];
+            entrada.add(item);
+        }
+    } else {
+        for(const opcion in listado){
+            var item = document.createElement("option");
+            item.text = listado[opcion].nombre;
+            item.value = listado[opcion].nombre;
+            entrada.add(item);
+        }
     }
     return entrada;
 }
+// Funciones de alta con formularios comprobados
+// Da de alta hospital 
 function darAltahospital(){
-    let nombre=document.getElementById("Nombre").value;
-    let localidad=document.getElementById("Localidad").value;
-    let responsable=document.getElementById("Responsable").value;
+    let nombre=document.getElementById("formhospital").elements["Nombre"].value;
+    let localidad=document.getElementById("formhospital").elements["Localidad"].value;
+    let responsable=document.getElementById("formhospital").elements["Responsable"].value;
     let hospital=new Hospital(nombre,localidad,responsable);
     hospitales.push(hospital);
+}
+// Da de alta Personal 
+function darAltapersonal(){
+    let nombre=document.getElementById("formpersonal").elements["Nombre"].value;
+    let especialidad=document.getElementById("Especialidad").value;
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    hospitales[hospital].addPersonal(new Personal(nombre,especialidad));
 }
 function creaLabelFormulario(nombre){
     let label=document.createElement("label"); 
@@ -55,6 +76,7 @@ function creaLabelFormulario(nombre){
 // Funcion que crea un formulario
 function creaFormulario(objeto,div){
     let formulario = document.createElement("form");
+    formulario.setAttribute('id',div.replace('visualizacion','form'));
     for(const propiedad in objeto){
         let label=creaLabelFormulario(objeto[propiedad]);
         formulario.appendChild(label);
@@ -64,8 +86,12 @@ function creaFormulario(objeto,div){
         formulario.appendChild(br);  
     } 
     if (div=="visualizacion"+"personal"){
-        let label=creaLabelFormulario("Hospital");
+        let label=creaLabelFormulario("Especialidad");
         formulario.appendChild(label);
+        let especialidad=creaListaFormulario("Especialidad",["Médico","Enfermera","Nombre"], true);
+        formulario.appendChild(especialidad);
+        let label2=creaLabelFormulario("Hospital");
+        formulario.appendChild(label2);
         let entrada=creaListaFormulario("Hospital",hospitales);
         formulario.appendChild(entrada);
     }    
