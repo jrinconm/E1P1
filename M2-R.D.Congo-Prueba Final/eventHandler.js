@@ -8,7 +8,7 @@ function click(ev){
 // Funcion al llamar a submit del formulacion
 function submit(ev){
     ev.preventDefault();
-    formulario=ev.target.parentNode;
+    let formulario=ev.target.parentNode;
     if(compruebaFormulario(formulario)){
         console.log(ev.target.className);
         // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
