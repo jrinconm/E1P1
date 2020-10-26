@@ -4,6 +4,13 @@ function click(ev){
     // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
     window[ev.target.name]();
 }
+function submit(ev){
+    // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
+    ev.preventDefault();
+    formulario=ev.target.parentNode;
+    compruebaFormulario(formulario);
+    return false;
+}
 function pacienteAlta(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");

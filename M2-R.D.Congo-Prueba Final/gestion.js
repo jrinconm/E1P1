@@ -73,16 +73,37 @@ function creaTablaObjeto(objetos){
     tabla.appendChild(cuerpoTabla);
     return tabla;
 }
+// Funcion que comprueba los campos de un formulario
+function compruebaFormulario(formulario){
+    // Primero compruebo las listas
+    //validaLista();
+    // Compruebo los input de tipo text
+    let campos=formulario.elements;    
+    for(const campo in campos){
+        if(campos[campo].type=="text"){
+            if(campos[campo].value.length == 0){
+                alert("Debes introducir "+campos[campo].name)
+                campos[campo].focus();
+                
+                break;
+            }
+        }
+    }
+}
 // Funcion que crea una entrada de formulario
 function creaEntradaFormulario(nombre){
     let entrada = document.createElement("input"); 
     entrada.setAttribute("type", "text"); 
     entrada.setAttribute("name", nombre);
+    entrada.setAttribute("id", nombre);
+    entrada.setAttribute("class", "entradaTexto");
     return entrada;
 }
 function creaListaFormulario(nombre,listado){
     let entrada = document.createElement("select"); 
     entrada.setAttribute("name", nombre);
+    entrada.setAttribute("id", nombre);
+    entrada.setAttribute("class", "entradaLista");
     for(const opcion in listado){
         var item = document.createElement("option");
         item.text = listado[opcion].nombre;
@@ -116,6 +137,7 @@ function creaFormulario(objeto,div){
     let enviar = document.createElement("input");
     enviar.setAttribute('type',"submit");
     enviar.setAttribute('value',"Submit");
+    enviar.addEventListener("click",submit,false);
     formulario.appendChild(enviar);
     document.getElementById(div).appendChild(formulario);    
     return formulario;  
@@ -138,7 +160,6 @@ function creaBorraDiv(elemento){
     // Borro el contenido del div 
     document.getElementById("visualizacion"+elemento).innerHTML="";
 }
-
 /* Creo un boton combinando:
 Tipo(alta, baja, modificacion y mostrar) y Elemento(hospita, personal, paciente)
 El nombre del boton combina elemento+tipo y llama a una funcion llamada click
