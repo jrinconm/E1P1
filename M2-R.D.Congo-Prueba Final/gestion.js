@@ -80,20 +80,39 @@ function darAltapaciente(){
 // Da de baja hospital 
 function darBajahospital(){
     let hospital=document.getElementById("Hospital").selectedIndex;
-    let ultimohospital=hospitales.length;
+    hospitales=eliminaIndiceArray(hospitales,hospital);
+}
+// Da de baja personal
+function darBajapersonal(){
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let persona=document.getElementById("Personal").selectedIndex;
+    hospitales[hospital].eliminaPersonal(persona);
+}
+// Da de baja paciente  
+function darBajapaciente(){
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let persona=document.getElementById("Personal").selectedIndex;
+    let paciente=document.getElementById("Paciente").selectedIndex;
+    hospitales[hospital].personal[persona].eliminaPaciente(paciente);
+}
+//Elimina un indice de un array
+function eliminaIndiceArray(array,indice){
+    let ultimoItem=array.length;
     // Si es el primero hospital lo borro con un shif
-    if(hospital==0){
-        hospitales.shift();
+    if(indice==0){
+        array.shift();
     // Si es el ultimo lo borro con un shif
-    } else if(hospital==ultimohospital){
-        hospitales.pop();
+    } else if(indice==ultimoItem){
+        array.pop();
     // Si está en medio me toca cortar y pegar
     } else {
-        let primertrozo=hospitales.slice(0,hospital);
-        let segundotrozo=hospitales.slice(hospital+1);
-        hospitales=primertrozo.concat(segundotrozo);
-    }
+        let primertrozo=array.slice(0,indice);
+        let segundotrozo=array.slice(indice+1);
+        array=primertrozo.concat(segundotrozo);
+    }  
+    return array;  
 }
+
 function creaLabelFormulario(nombre){
     let label=document.createElement("label"); 
     label.innerText=nombre+": ";

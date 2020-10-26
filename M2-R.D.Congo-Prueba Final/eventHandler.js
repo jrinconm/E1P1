@@ -58,14 +58,6 @@ function pacienteMostrar(){
             let tabla=creaTablaObjeto(hospitales[hospital].personal[persona].pacientes)
             elemento.append(tabla); 
         }
-        /*
-        let elemento=document.getElementById("visualizacion"+"personal");
-        let texto="El hospital: " + hospitales[hospital].nombre + " tiene el siguiente personal:";
-        let cabecera = creaCabecera(texto,"h2");
-        elemento.append(cabecera);
-        let tabla=creaTablaObjeto(hospitales[hospital].personal)
-        elemento.append(tabla); 
-        */
     } 
 }
 //Funcion al hacer click en Mostrar personal

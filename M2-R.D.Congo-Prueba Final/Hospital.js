@@ -12,7 +12,6 @@ class Hospital {
         this.personal.push(persona);
     }    
     eliminaPersonal(persona){
-        indice=this.pacientes.indexOf(persona);
-        console.log(indice);
+        this.personal=eliminaIndiceArray(this.personal,persona);
     }
 }

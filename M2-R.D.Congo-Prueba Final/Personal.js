@@ -11,7 +11,6 @@ class Personal {
         this.pacientes.push(paciente);
     }
     eliminaPaciente(paciente){
-        indice=this.pacientes.indexOf(paciente);
-        console.log(indice);
+        this.pacientes=eliminaIndiceArray(this.pacientes,paciente);
     }
 }
