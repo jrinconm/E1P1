@@ -152,7 +152,7 @@ function creaFormulario(objeto,div,accion='Alta'){
                     break;
                 // Para el alta de Pacientes... No debería ir así...
                 case 'visualizacionpaciente':
-                    addItemListaForm("Hospital",hospitales,formulario);
+                    addItemListaForm("Hospital",hospitales,formulario);                    
                     // Compruebo si hay un hospital como minimo
                     if(hospitales.length!=0){
                         // De base esto no se puede elegir personal
@@ -160,7 +160,6 @@ function creaFormulario(objeto,div,accion='Alta'){
                     }
                     break;
             }
-
             break;
         case 'Baja':
             switch (div){
@@ -196,7 +195,6 @@ function creaFormulario(objeto,div,accion='Alta'){
                     break;
             }            
             break;
-
     }
     // Creo el botón de submit
     let enviar = document.createElement("input");
@@ -204,7 +202,7 @@ function creaFormulario(objeto,div,accion='Alta'){
     enviar.setAttribute('value',"Submit");
     // Elimino visualizacion del texto div para que se quede solo la clase
     enviar.setAttribute('class',div.replace('visualizacion',accion));
-    enviar.addEventListener("click",submit,false);
+    enviar.addEventListener("click",hacersubmit,false);
     formulario.appendChild(enviar);
     document.getElementById(div).appendChild(formulario);     
 }
@@ -242,7 +240,7 @@ function creaboton(tipo, elemento){
     document.getElementById(elemento).appendChild(boton);
     //document.body.appendChild(boton);
     boton.innerText=tipo + " " +elemento;
-    boton.addEventListener("click",click,false);
+    boton.addEventListener("click",hacerclick,false);
 }
 // Carga la pantalla inicial
 function muestraDatos(){  

@@ -1,12 +1,12 @@
 "use strict";
 // Funcion para ejecutar cuando se hace click
 // Ejecuta una funcion basada en la lista de funciones de window
-function click(ev){
+function hacerclick(ev){
     // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
     window[ev.target.name]();
 }
 // Funcion al llamar a submit del formulacion
-function submit(ev){
+function hacersubmit(ev){
     ev.preventDefault();
     let formulario=ev.target.parentNode;
     if(compruebaFormulario(formulario)){        
@@ -15,6 +15,23 @@ function submit(ev){
     }
     return false;
 }
+//
+function refrescaListaPersonal(){
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let select=document.getElementById("Personal");
+    let personal=hospitales[hospital].personal;
+    // Elimino las opciones
+    while(select.options.length > 0){
+        select.remove(0);
+    }
+    // Añado las nuevas
+    for(const persona in personal){
+        var item = document.createElement("option");
+        item.text = personal[persona].nombre;
+        item.value = personal[persona].nombre;
+        select.add(item);
+    }
+}
 //Grupo botones Alta
 //Funcion al hacer click en Alta paciente
 function pacienteAlta(){
@@ -22,7 +39,9 @@ function pacienteAlta(){
     creaBorraDiv("paciente");
     //Lista de entry tipo texto
     let propiedades=["Nombre","Enfermedad"];
-    creaFormulario(propiedades,"visualizacion"+"paciente");    
+    creaFormulario(propiedades,"visualizacion"+"paciente");  
+    // Añado listener para cuando se cambia de hospital
+    document.getElementById("Hospital").addEventListener("change",refrescaListaPersonal,false);  
 }
 //Funcion al hacer click en Alta personal
 function personalAlta(){
