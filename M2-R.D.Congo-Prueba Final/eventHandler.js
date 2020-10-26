@@ -20,17 +20,39 @@ function refrescaListaPersonal(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     let select=document.getElementById("Personal");
     let personal=hospitales[hospital].personal;
-    // Elimino las opciones
-    while(select.options.length > 0){
-        select.remove(0);
-    }
-    // Añado las nuevas
-    for(const persona in personal){
-        var item = document.createElement("option");
-        item.text = personal[persona].nombre;
-        item.value = personal[persona].nombre;
-        select.add(item);
-    }
+    refrescaListaFormulario(select,personal);
+}
+function refrescaListaPacienteHospital(){
+    //He cambiado el hospital, refresco la gente tambien
+    refrescaListaPersonal();
+    //refrescaListaPacientePersonal();
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let persona=document.getElementById("Personal").selectedIndex;
+    let selectPersonal=document.getElementById("Personal");
+    let selectPaciente=document.getElementById("Paciente");
+    let personal=hospitales[hospital].personal;
+    //refrescaListaFormulario(selectPersonal,personal); 
+    // Por si no tiene personal el hospital
+    if(hospitales[hospital].personal.length!=0){
+        // Por si no tiene pacientes el personal elegido
+        refrescaListaFormulario(selectPersonal,personal);
+        refrescaListaPersonal();
+        if(hospitales[hospital].personal[persona].pacientes.length!=0){
+            refrescaListaFormulario(selectPaciente,personal);
+        } else {
+            refrescaListaFormulario(selectPaciente,[],true);
+        }
+    } else {
+        refrescaListaFormulario(selectPersonal,[],true);
+        refrescaListaFormulario(selectPaciente,[],true);
+    } 
+}
+function refrescaListaPacientePersonal(){
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let persona=document.getElementById("Personal").selectedIndex;
+    let select=document.getElementById("Paciente");
+    let pacientes=hospitales[hospital].personal[persona].pacientes;
+    refrescaListaFormulario(select,pacientes);
 }
 //Grupo botones Alta
 //Funcion al hacer click en Alta paciente
@@ -105,7 +127,9 @@ function hospitalMostrar(){
 function pacienteBaja(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");    
-    creaFormulario([],"visualizacion"+"paciente","Baja");          
+    creaFormulario([],"visualizacion"+"paciente","Baja");  
+    document.getElementById("Hospital").addEventListener("change",refrescaListaPacienteHospital,false);
+    document.getElementById("Personal").addEventListener("change",refrescaListaPacientePersonal,false);        
 }
 //Funcion al hacer click en Baja personal
 function personalBaja(){

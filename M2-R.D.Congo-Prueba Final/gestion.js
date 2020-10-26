@@ -52,6 +52,28 @@ function creaListaFormulario(nombre,listado,array){
     }
     return entrada;
 }
+function refrescaListaFormulario(lista,nuevasopciones,array){
+    // Elimino las opciones
+    while(lista.options.length > 0){
+        lista.remove(0);
+    }
+    // Añado las nuevas opciones
+    if(array){
+        for(const opcion in nuevasopciones){
+            var item = document.createElement("option");
+            item.text = nuevasopciones[opcion];
+            item.value = nuevasopciones[opcion];
+            lista.add(item);
+        }
+    } else {
+        for(const opcion in nuevasopciones){
+            var item = document.createElement("option");
+            item.text = nuevasopciones[opcion].nombre;
+            item.value = nuevasopciones[opcion].nombre;
+            lista.add(item);
+        }
+    }   
+}
 // Funciones de alta con formularios comprobados
 // Da de alta hospital 
 function darAltahospital(){
@@ -87,6 +109,8 @@ function darBajapersonal(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     let persona=document.getElementById("Personal").selectedIndex;
     hospitales[hospital].eliminaPersonal(persona);
+    //Refresco al lista
+    refrescaListaPersonal();
 }
 // Da de baja paciente  
 function darBajapaciente(){
@@ -94,6 +118,8 @@ function darBajapaciente(){
     let persona=document.getElementById("Personal").selectedIndex;
     let paciente=document.getElementById("Paciente").selectedIndex;
     hospitales[hospital].personal[persona].eliminaPaciente(paciente);
+    //Refresco la lista
+    refrescaListaPacienteHospital();
 }
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
