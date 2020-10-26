@@ -20,20 +20,22 @@ function submit(ev){
 function pacienteAlta(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");
-    let propiedades=["Nombre","Enfermedad","Hospital","Personal"];
+    //Lista de entry tipo texto
+    let propiedades=["Nombre","Enfermedad"];
     creaFormulario(propiedades,"visualizacion"+"paciente");    
-    //hospitales[0].personal[0].addPaciente(new Paciente("Jose","Infarto"));
 }
 //Funcion al hacer click en Alta personal
 function personalAlta(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");
+    //Lista de entry tipo texto
     let propiedades=["Nombre"];
     creaFormulario(propiedades,"visualizacion"+"personal");    
 }
 //Funcion al hacer click en Alta hospital
 function hospitalAlta(){
     creaBorraDiv("hospital");
+    //Lista de entry tipo texto
     let propiedades=["Nombre","Localidad","Responsable"];
     creaFormulario(propiedades,"visualizacion"+"hospital");       
 }
@@ -42,6 +44,29 @@ function hospitalAlta(){
 function pacienteMostrar(){
     // Borro y creo el div de personal
     creaBorraDiv("paciente");    
+    // Hago un bucle para revisar el personal de cada hospital
+    for (const hospital in hospitales){
+        let elemento=document.getElementById("visualizacion"+"paciente");
+        let texto="El hospital: " + hospitales[hospital].nombre + " tiene el siguiente personal:";
+        let cabecera = creaCabecera(texto,"h2");
+        elemento.append(cabecera);
+        // Hago un bucle para revisar el personal
+        for (const persona in hospitales[hospital].personal){
+            let texto="El personal: " + hospitales[hospital].personal[persona].nombre + " tiene los siguientes pacientes:";
+            let cabecera2 = creaCabecera(texto,"h3");
+            elemento.append(cabecera2);
+            let tabla=creaTablaObjeto(hospitales[hospital].personal[persona].pacientes)
+            elemento.append(tabla); 
+        }
+        /*
+        let elemento=document.getElementById("visualizacion"+"personal");
+        let texto="El hospital: " + hospitales[hospital].nombre + " tiene el siguiente personal:";
+        let cabecera = creaCabecera(texto,"h2");
+        elemento.append(cabecera);
+        let tabla=creaTablaObjeto(hospitales[hospital].personal)
+        elemento.append(tabla); 
+        */
+    } 
 }
 //Funcion al hacer click en Mostrar personal
 function personalMostrar(){

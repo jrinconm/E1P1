@@ -68,6 +68,14 @@ function darAltapersonal(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     hospitales[hospital].addPersonal(new Personal(nombre,especialidad));
 }
+// Da de alta Personal 
+function darAltapaciente(){
+    let nombre=document.getElementById("formpaciente").elements["Nombre"].value;
+    let enfermedad=document.getElementById("formpaciente").elements["Enfermedad"].value;
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let personal=document.getElementById("Personal").selectedIndex;
+    hospitales[hospital].personal[personal].addPaciente(new Paciente(nombre,enfermedad));
+}
 function creaLabelFormulario(nombre){
     let label=document.createElement("label"); 
     label.innerText=nombre+": ";
@@ -85,16 +93,37 @@ function creaFormulario(objeto,div){
         let br = document.createElement("br"); 
         formulario.appendChild(br);  
     } 
+    // Para el alta de Personal... No debería ir así...
     if (div=="visualizacion"+"personal"){
         let label=creaLabelFormulario("Especialidad");
         formulario.appendChild(label);
-        let especialidad=creaListaFormulario("Especialidad",["Médico","Enfermera","Nombre"], true);
+        let especialidad=creaListaFormulario("Especialidad",["Médico","Enfermera","Celador"], true);
         formulario.appendChild(especialidad);
         let label2=creaLabelFormulario("Hospital");
         formulario.appendChild(label2);
         let entrada=creaListaFormulario("Hospital",hospitales);
         formulario.appendChild(entrada);
+        let br = document.createElement("br"); 
+        formulario.appendChild(br);
     }    
+    // Para el alta de Pacientes... No debería ir así...
+    if (div=="visualizacion"+"paciente"){
+        let label2=creaLabelFormulario("Hospital");
+        formulario.appendChild(label2);
+        let entrada=creaListaFormulario("Hospital",hospitales);
+        formulario.appendChild(entrada);
+        // De base esto no se puede elegir personal
+        let label=creaLabelFormulario("Personal");
+        formulario.appendChild(label);
+        // Compruebo si hay un hospital como minimo
+        if(hospitales.length!=0){
+            let personal=creaListaFormulario("Personal",hospitales[0].personal);
+            formulario.appendChild(personal);
+            let br = document.createElement("br"); 
+            formulario.appendChild(br);
+        }
+    } 
+    // Creo el botón de submit
     let enviar = document.createElement("input");
     enviar.setAttribute('type',"submit");
     enviar.setAttribute('value',"Submit");
@@ -113,7 +142,12 @@ function creaCabecera(texto,tipo="h1"){
 }
 // Inicializa el div que muestra un elemento (las clases)
 function creaBorraDiv(elemento){
-    // Si no existe el div lo creo
+    //Elimino los divs de visualizacion
+    while(document.querySelector('[id^=visualizacion]')){
+        let element=document.querySelector('[id^=visualizacion]');
+        element.parentNode.removeChild(document.querySelector('[id^=visualizacion]'));
+    }
+    // No va a existir el div... lo creo
     if (!document.getElementById("visualizacion"+elemento)){
         let div = document.createElement("div");
         div.setAttribute("id", "visualizacion"+elemento);
