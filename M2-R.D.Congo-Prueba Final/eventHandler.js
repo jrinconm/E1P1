@@ -96,14 +96,15 @@ function pacienteBaja(){
     creaBorraDiv("paciente");    
 }
 //Funcion al hacer click en Baja personal
-function pacienteBaja(){
+function personalBaja(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");    
 }
 //Funcion al hacer click en Baja hospital
-function pacienteBaja(){
+function hospitalBaja(){
     // Borro y creo el div de hospital
-    creaBorraDiv("hospital");    
+    creaBorraDiv("hospital");  
+    creaFormulario([],"visualizacion"+"baja"+"hospital");      
 }
 //Grupo botones Modificar
 //Funcion al hacer click en Modificar paciente
@@ -112,12 +113,12 @@ function pacienteModificar(){
     creaBorraDiv("paciente");    
 }
 //Funcion al hacer click en Modificar personal
-function pacienteModificar(){
+function personalModificar(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");    
 }
 //Funcion al hacer click en Modificar hospital
-function pacienteModificar(){
+function hospitalModificar(){
     // Borro y creo el div de hospital
     creaBorraDiv("hospital");    
 }

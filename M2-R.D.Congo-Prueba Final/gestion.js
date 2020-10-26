@@ -81,48 +81,55 @@ function creaLabelFormulario(nombre){
     label.innerText=nombre+": ";
     return label;
 }
+function addItemEntradaForm(item,form){
+    let label=creaLabelFormulario(item);
+    form.appendChild(label);
+    let entrada=creaEntradaFormulario(item);
+    form.appendChild(entrada);
+    let br = document.createElement("br"); 
+    form.appendChild(br);  
+}
+function addItemListaForm(item,lista,form,esArray){
+    let label=creaLabelFormulario(item);
+    form.appendChild(label);
+    let entrada=creaListaFormulario(item,lista,esArray);
+    form.appendChild(entrada);
+    let br = document.createElement("br"); 
+    form.appendChild(br);
+}
 // Funcion que crea un formulario
-function creaFormulario(objeto,div){
+function creaFormulario(objeto,div,accion='alta'){
     let formulario = document.createElement("form");
     formulario.setAttribute('id',div.replace('visualizacion','form'));
-    for(const propiedad in objeto){
-        let label=creaLabelFormulario(objeto[propiedad]);
-        formulario.appendChild(label);
-        let entrada=creaEntradaFormulario(objeto[propiedad]);
-        formulario.appendChild(entrada);
-        let br = document.createElement("br"); 
-        formulario.appendChild(br);  
-    } 
-    // Para el alta de Personal... No debería ir así...
-    if (div=="visualizacion"+"personal"){
-        let label=creaLabelFormulario("Especialidad");
-        formulario.appendChild(label);
-        let especialidad=creaListaFormulario("Especialidad",["Médico","Enfermera","Celador"], true);
-        formulario.appendChild(especialidad);
-        let label2=creaLabelFormulario("Hospital");
-        formulario.appendChild(label2);
-        let entrada=creaListaFormulario("Hospital",hospitales);
-        formulario.appendChild(entrada);
-        let br = document.createElement("br"); 
-        formulario.appendChild(br);
-    }    
-    // Para el alta de Pacientes... No debería ir así...
-    if (div=="visualizacion"+"paciente"){
-        let label2=creaLabelFormulario("Hospital");
-        formulario.appendChild(label2);
-        let entrada=creaListaFormulario("Hospital",hospitales);
-        formulario.appendChild(entrada);
-        // De base esto no se puede elegir personal
-        let label=creaLabelFormulario("Personal");
-        formulario.appendChild(label);
-        // Compruebo si hay un hospital como minimo
-        if(hospitales.length!=0){
-            let personal=creaListaFormulario("Personal",hospitales[0].personal);
-            formulario.appendChild(personal);
-            let br = document.createElement("br"); 
-            formulario.appendChild(br);
-        }
-    } 
+    switch (accion){
+        //Por defecto la acción es alta
+        case 'alta':
+            for(const propiedad in objeto){
+                addItemEntradaForm(objeto[propiedad],formulario);
+            } 
+            switch (div){
+                // Para el alta de Personal... No debería ir así...
+                case 'visualizacionpersonal':
+                    addItemListaForm("Especialidad",["Médico","Enfermera","Celador"],formulario,true);
+                    addItemListaForm("Hospital",hospitales,formulario);
+                    break;
+                // Para el alta de Pacientes... No debería ir así...
+                case 'visualizacionpaciente':
+                    addItemListaForm("Hospital",hospitales,formulario);
+                    // Compruebo si hay un hospital como minimo
+                    if(hospitales.length!=0){
+                        // De base esto no se puede elegir personal
+                        addItemListaForm("Personal",hospitales[0].personal,formulario);
+                    }
+                    break;
+            }
+            break;
+        case 'baja':
+            break;
+
+    }
+
+
     // Creo el botón de submit
     let enviar = document.createElement("input");
     enviar.setAttribute('type',"submit");
