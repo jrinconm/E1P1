@@ -11,7 +11,7 @@ function submit(ev){
     let formulario=ev.target.parentNode;
     if(compruebaFormulario(formulario)){        
         // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
-        window["darAlta"+ev.target.className](ev.target.parentNode);
+        window["dar"+ev.target.className](ev.target.parentNode);
     }
     return false;
 }
@@ -94,17 +94,19 @@ function hospitalMostrar(){
 function pacienteBaja(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");    
+    creaFormulario([],"visualizacion"+"paciente","Baja");          
 }
 //Funcion al hacer click en Baja personal
 function personalBaja(){
     // Borro y creo el div de personal
-    creaBorraDiv("personal");    
+    creaBorraDiv("personal");   
+    creaFormulario([],"visualizacion"+"personal","Baja");           
 }
 //Funcion al hacer click en Baja hospital
 function hospitalBaja(){
     // Borro y creo el div de hospital
     creaBorraDiv("hospital");  
-    creaFormulario([],"visualizacion"+"baja"+"hospital");      
+    creaFormulario([],"visualizacion"+"hospital","Baja");      
 }
 //Grupo botones Modificar
 //Funcion al hacer click en Modificar paciente

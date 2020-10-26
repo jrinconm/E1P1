@@ -61,20 +61,38 @@ function darAltahospital(){
     let hospital=new Hospital(nombre,localidad,responsable);
     hospitales.push(hospital);
 }
-// Da de alta Personal 
+// Da de alta personal 
 function darAltapersonal(){
     let nombre=document.getElementById("formpersonal").elements["Nombre"].value;
     let especialidad=document.getElementById("Especialidad").value;
     let hospital=document.getElementById("Hospital").selectedIndex;
     hospitales[hospital].addPersonal(new Personal(nombre,especialidad));
 }
-// Da de alta Personal 
+// Da de alta paciente 
 function darAltapaciente(){
     let nombre=document.getElementById("formpaciente").elements["Nombre"].value;
     let enfermedad=document.getElementById("formpaciente").elements["Enfermedad"].value;
     let hospital=document.getElementById("Hospital").selectedIndex;
     let personal=document.getElementById("Personal").selectedIndex;
     hospitales[hospital].personal[personal].addPaciente(new Paciente(nombre,enfermedad));
+}
+// Funciones de baja con formularios comprobados
+// Da de baja hospital 
+function darBajahospital(){
+    let hospital=document.getElementById("Hospital").selectedIndex;
+    let ultimohospital=hospitales.length;
+    // Si es el primero hospital lo borro con un shif
+    if(hospital==0){
+        hospitales.shift();
+    // Si es el ultimo lo borro con un shif
+    } else if(hospital==ultimohospital){
+        hospitales.pop();
+    // Si está en medio me toca cortar y pegar
+    } else {
+        let primertrozo=hospitales.slice(0,hospital);
+        let segundotrozo=hospitales.slice(hospital+1);
+        hospitales=primertrozo.concat(segundotrozo);
+    }
 }
 function creaLabelFormulario(nombre){
     let label=document.createElement("label"); 
@@ -98,12 +116,12 @@ function addItemListaForm(item,lista,form,esArray){
     form.appendChild(br);
 }
 // Funcion que crea un formulario
-function creaFormulario(objeto,div,accion='alta'){
+function creaFormulario(objeto,div,accion='Alta'){
     let formulario = document.createElement("form");
     formulario.setAttribute('id',div.replace('visualizacion','form'));
     switch (accion){
         //Por defecto la acción es alta
-        case 'alta':
+        case 'Alta':
             for(const propiedad in objeto){
                 addItemEntradaForm(objeto[propiedad],formulario);
             } 
@@ -123,19 +141,50 @@ function creaFormulario(objeto,div,accion='alta'){
                     }
                     break;
             }
+
             break;
-        case 'baja':
+        case 'Baja':
+            switch (div){
+                case 'visualizacionhospital':
+                    // Compruebo si hay un hospital como minimo
+                    if(hospitales.length!=0){
+                        addItemListaForm("Hospital",hospitales,formulario);
+                    }
+                    break;
+                case 'visualizacionpersonal':                    
+                    // Compruebo si hay un hospital como minimo
+                    if(hospitales.length!=0){
+                        addItemListaForm("Hospital",hospitales,formulario);
+                        // Compruebo si hay un personal como minimo
+                        if(hospitales[0].personal!=0){
+                            addItemListaForm("Personal",hospitales[0].personal,formulario);
+                        }
+                    }
+                    break;
+                case 'visualizacionpaciente':
+                    // Compruebo si hay un hospital como minimo
+                    if(hospitales.length!=0){
+                        addItemListaForm("Hospital",hospitales,formulario);
+                        // Compruebo si hay un personal como minimo
+                        if(hospitales[0].personal!=0){
+                            addItemListaForm("Personal",hospitales[0].personal,formulario);
+                            //Compruebo si hay pacientes
+                            if(hospitales[0].personal[0].pacientes.length!=0){
+                                addItemListaForm("Paciente",hospitales[0].personal[0].pacientes,formulario);
+                            }                    
+                        }
+                    }
+                    break;
+            }            
             break;
 
     }
-
-
     // Creo el botón de submit
     let enviar = document.createElement("input");
     enviar.setAttribute('type',"submit");
     enviar.setAttribute('value',"Submit");
     // Elimino visualizacion del texto div para que se quede solo la clase
-    enviar.setAttribute('class',div.replace('visualizacion',''));
+    enviar.setAttribute('class',div.replace('visualizacion',accion));
     enviar.addEventListener("click",submit,false);
     formulario.appendChild(enviar);
     document.getElementById(div).appendChild(formulario);     
