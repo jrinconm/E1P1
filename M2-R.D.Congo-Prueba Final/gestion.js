@@ -162,8 +162,8 @@ function darModificacionpersonal(){
     let idHospital=document.getElementById("hidden0").value;
     // El personal es el segundo de los ocultos
     let idPersonal=document.getElementById("hidden1").value;
-    hospitales[idHospital][idPersonal].nombre=document.getElementById("formpersonal").elements["nombre"].value;
-    hospitales[idHospital][idPersonal].especialidad=document.getElementById("formpersonal").elements["especialidad"].value;
+    hospitales[idHospital].personal[idPersonal].nombre=document.getElementById("nombre").value;
+    hospitales[idHospital].personal[idPersonal].especialidad=document.getElementById("Especialidad").value;
     personalMostrar();
 }
 
@@ -226,7 +226,13 @@ function creaFormulario(objeto,div,accion='Alta',ocultos){
         case 'Modificacion':
             for(const propiedad in objeto){
                 if(typeof(objeto[propiedad]) !== 'object'){
-                    addItemEntradaForm(propiedad,formulario,objeto[propiedad]);
+                    // La especialidad es una lista no un entry
+                    if(propiedad=="especialidad"){
+                        addItemListaForm("Especialidad",["Médico","Enfermera","Celador"],formulario,true);
+                    } else {
+                        addItemEntradaForm(propiedad,formulario,objeto[propiedad]);
+                    }
+                    
                 }                  
             }   
             for(const oculto in ocultos){

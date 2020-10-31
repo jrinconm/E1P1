@@ -9,7 +9,7 @@ function hacerclick(ev){
 function hacersubmit(ev){
     ev.preventDefault();
     let formulario=ev.target.parentNode;
-    if(compruebaFormulario(formulario)){       ;
+    if(compruebaFormulario(formulario)){  
         // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
         window["dar"+ev.target.className](ev.target.parentNode);
     }
