@@ -14,6 +14,7 @@
                     <input type="text" name="identificador" id="identificador"
                     maxlength="10" pattern="[A-Za-z](\d){8}[A-Za-z]" required/>
                 </td>
+                <td id="erroridentificador"></td>
             </tr>
             <tr>
                 <td>Nombre y apellidos</td>
@@ -21,6 +22,7 @@
                     <input type="text" name="nombre" id="nombre"
                     maxlength="50" required/>
                 </td>
+                <td id="errornombre"></td>
             </tr>   
             <tr>
                 <td>Fecha de nacimiento</td>
@@ -28,6 +30,7 @@
                     <input type="text" name="fechaNacimiento" id="fechaNacimiento"
                     maxlength="10" pattern="(\d){2}/(\d){2}/(\d){4}"required/>
                 </td>
+                <td id="errorfechaNacimiento"></td>
             </tr> 
             <tr>
                 <td>Correo electrónico</td>
@@ -37,6 +40,7 @@
                     pattern="[A-Za-z0-9\._\-]{1,20}@[A-Za-z]{1,20}\.[A-Za-z]{2,3}" 
                     />
                 </td>
+                <td id="errorcorreo"></td>
             </tr>  
             <tr>
                 <td>Teléfono</td>
@@ -46,6 +50,7 @@
                     pattern="[+][0-9]{2,3}[\-][0-9]{9}" 
                     />
                 </td>
+                <td id="errortelefono"></td>
             </tr> 
             <tr>
                 <td>Edad</td>
@@ -70,7 +75,8 @@
                     maxlength="5" 
                     pattern="[1-9]{1}[0-9]{4}" 
                     disabled />
-                </td>                
+                </td>      
+                <td id="errorsocio"></td>          
             </tr> 
             <tr>
                 <td>Categoría</td>

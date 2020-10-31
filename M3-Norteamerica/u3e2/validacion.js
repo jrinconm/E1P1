@@ -30,13 +30,14 @@ function validar(){
 }
 // Muestra el texto del error y marca el elemento en rojo
 function error(elemento){
-    let mensajeError = document.createTextNode(elemento.validationMessage);
-    elemento.appendChild(mensajeError);
+    // Como está en formato elemento y celda, subo 2 escalafones para arriba
+    document.getElementById("error"+elemento.id).innerHTML=elemento.validationMessage;
     elemento.className="error";
 }
 // Borra la clase error si es correcta
 function borrarError(identificador){
     let elemento = document.getElementById(identificador);
+    document.getElementById("error"+elemento.id).innerHTML="";
     elemento.className="";
 }
 // Valida un elemento 
