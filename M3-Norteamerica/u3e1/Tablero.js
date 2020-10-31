@@ -28,9 +28,13 @@ function hacerclick(ev){
         let idCarta=ev.target.id;
         voltea(idCarta);
         if(partida.compruebaPareja()){
+            // Si es correcto, pongo borde y reseteo contadores
+            document.getElementById(idCarta).style.border="5px solid green";
+            document.getElementById(partida.volteada).style.border="5px solid green";
             partida.pareja=[];
             partida.contador=0;
         } else {
+            // Si no son iguales espero 3 segundos y ejecuto error cartas
             setTimeout("errorCartas(partida.volteada,"+idCarta+");",3000);
         }
     }      
