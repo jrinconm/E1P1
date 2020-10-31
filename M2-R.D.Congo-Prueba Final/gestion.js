@@ -136,15 +136,37 @@ function darModificarhospital(){
     let idHospital=document.getElementById("Hospital").selectedIndex;
     creaBorraDiv("hospital");
     // Creo el formulario
-    creaFormulario(hospitales[idHospital],"visualizacion"+"hospital","Modificacion",idHospital);  
+    creaFormulario(hospitales[idHospital],"visualizacion"+"hospital","Modificacion",[idHospital]);  
 }
 //Realizo la modificacion del hospital
 function darModificacionhospital(){
-    let idHospital=document.getElementById("hiddenIdHospital").value;
+    // El hospital es el primero valor de los ocultos
+    let idHospital=document.getElementById("hidden0").value;
     hospitales[idHospital].nombre=document.getElementById("formhospital").elements["nombre"].value;
     hospitales[idHospital].localidad=document.getElementById("formhospital").elements["localidad"].value;
     hospitales[idHospital].responsable=document.getElementById("formhospital").elements["responsable"].value;
+    hospitalMostrar();
 }
+// Muestra el panel para Modifica personal 
+function darModificarpersonal(){
+    // El hospital a modificar es el del indice seleccionado
+    let idHospital=document.getElementById("Hospital").selectedIndex;
+    let idpersonal=document.getElementById("Personal").selectedIndex;
+    creaBorraDiv("personal");
+    // Creo el formulario
+    creaFormulario(hospitales[idHospital].personal[idpersonal],"visualizacion"+"personal","Modificacion",[idHospital,idpersonal]);  
+}
+//Realizo la modificacion del personal
+function darModificacionpersonal(){
+    // El hospital es el primero valor de los ocultos
+    let idHospital=document.getElementById("hidden0").value;
+    // El personal es el segundo de los ocultos
+    let idPersonal=document.getElementById("hidden1").value;
+    hospitales[idHospital][idPersonal].nombre=document.getElementById("formpersonal").elements["nombre"].value;
+    hospitales[idHospital][idPersonal].especialidad=document.getElementById("formpersonal").elements["especialidad"].value;
+    personalMostrar();
+}
+
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
     let ultimoItem=array.length;
@@ -197,7 +219,7 @@ function addItemOcultoForm(id,valor,form){
 }
 // Funcion que crea un formulario
 // Pendiente de simplificar
-function creaFormulario(objeto,div,accion='Alta',id){
+function creaFormulario(objeto,div,accion='Alta',ocultos){
     let formulario = document.createElement("form");
     formulario.setAttribute('id',div.replace('visualizacion','form'));
     switch (accion){
@@ -205,9 +227,11 @@ function creaFormulario(objeto,div,accion='Alta',id){
             for(const propiedad in objeto){
                 if(typeof(objeto[propiedad]) !== 'object'){
                     addItemEntradaForm(propiedad,formulario,objeto[propiedad]);
-                }  
-                addItemOcultoForm("hiddenIdHospital",id,formulario)
-            }          
+                }                  
+            }   
+            for(const oculto in ocultos){
+                addItemOcultoForm("hidden"+oculto,ocultos[oculto],formulario)       
+            }            
             break; 
         //Por defecto la acción es alta
         case 'Alta':
