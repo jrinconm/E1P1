@@ -6,26 +6,45 @@
 <body>
     <form id="formulario">
         <table>
+            <!--
             <tr>
                 <td>Identificador</td>
                 <td>
                     <input type="text" name="identificador" id="identificador"
-                    maxlength="10" pattern="[A-Za-z](\d){8}[A-Za-z]"/>
+                    maxlength="10" pattern="[A-Za-z](\d){8}[A-Za-z]" required/>
                 </td>
             </tr>
             <tr>
-                <td>Identificador: 1 letra, 8 cifras y 1 letra. Obligatorio.
-            Nombre y apellidos: cadena de 50 caracteres. Obligatorio.
-            Fecha de nacimiento: campo con formato dd/mm/yyyy. Obligatorio.
-            Correo electrónico: en formato varios caracteres (letras, números, puntos o guiones altos o bajos, 20 máximo) seguido de arroba, letras (20 máximo), punto (1), y 2 o 3 letras.
-            Teléfono: con formato + y dos o tres cifras seguido de guión y 9 cifras.
-            Edad: desplegable con texto niño / adulto / jubilado.
-            Club de ski: ckeckbox que, si se pulsa, activa los siguientes campos:
-            Número de socio: número de 5 cifras, del 10000 al 99999.
-            Categoría: infantil / juvenil / senior: radio button.
+                <td>Nombre y apellidos</td>
+                <td>
+                    <input type="text" name="nombre" id="nombre"
+                    maxlength="50" required/>
                 </td>
-            </tr>            
+            </tr>   
+            <tr>
+                <td>Fecha de nacimiento</td>
+                <td>
+                    <input type="text" name="fechaNacimiento" id="fechaNacimiento"
+                    maxlength="10" pattern="(\d){2}/(\d){2}/(\d){4}"required/>
+                </td>
+            </tr> -->
+            <tr>
+                <td>Correo electrónico</td>
+                <td>
+                    <input type="text" name="correo" id="correo"
+                    maxlength="20" 
+                    pattern="[A-Za-z0-9\._\-]{1,20}@[A-Za-z]{1,20}\.[A-Za-z]{2,3}" 
+                    required/>
+                </td>
+            </tr>  
         </table>
+        Correo electrónico: en formato varios caracteres (letras, números, puntos o guiones altos o bajos, 20 máximo) 
+        seguido de arroba, letras (20 máximo), punto (1), y 2 o 3 letras.
+        Teléfono: con formato + y dos o tres cifras seguido de guión y 9 cifras.
+        Edad: desplegable con texto niño / adulto / jubilado.
+        Club de ski: ckeckbox que, si se pulsa, activa los siguientes campos:
+        Número de socio: número de 5 cifras, del 10000 al 99999.
+        Categoría: infantil / juvenil / senior: radio button.
         <input type="submit" value="Enviar" id="enviar" />
         <input type="reset" value="Borrar" id="borrar" />
     </form>
