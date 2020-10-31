@@ -166,7 +166,28 @@ function darModificacionpersonal(){
     hospitales[idHospital].personal[idPersonal].especialidad=document.getElementById("Especialidad").value;
     personalMostrar();
 }
-
+// Muestra el panel para Modifica paciente 
+function darModificarpaciente(){
+    // El paciente a modificar es el del indice seleccionado
+    let idHospital=document.getElementById("Hospital").selectedIndex;
+    let idPersonal=document.getElementById("Personal").selectedIndex;
+    let idPaciente=document.getElementById("Paciente").selectedIndex;
+     creaBorraDiv("paciente");
+    // Creo el formulario
+    creaFormulario(hospitales[idHospital].personal[idPersonal].pacientes[idPaciente],"visualizacion"+"paciente","Modificacion",[idHospital,idPersonal,idPaciente]);  
+}
+//Realizo la modificacion del paciente
+function darModificacionpaciente(){
+    // El hospital es el primero valor de los ocultos
+    let idHospital=document.getElementById("hidden0").value;
+    // El personal es el segundo de los ocultos
+    let idPersonal=document.getElementById("hidden1").value;
+    // El paciente es el tercero de los ocultos
+    let idPaciente=document.getElementById("hidden2").value;    
+    hospitales[idHospital].personal[idPersonal].paciente[idPaciente].nombre=document.getElementById("nombre").value;
+    hospitales[idHospital].personal[idPersonal].paciente[idPaciente].enfermedad=document.getElementById("Enfermedad").value;
+    personalMostrar();
+}
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
     let ultimoItem=array.length;
