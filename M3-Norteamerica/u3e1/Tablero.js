@@ -12,9 +12,7 @@ function errorCartas(carta1,carta2){
     // Vuelvo a permitir hacer click sobre la carta
     document.getElementById(carta1).addEventListener("click",hacerclick,false);
     voltea(carta1);
-    console.log(partida.contador);
     voltea(carta2);
-    console.log(partida.contador);
     partida.pareja=[];
     partida.contador=0;
 }
@@ -26,13 +24,14 @@ function hacerclick(ev){
         // No permito que se le vuelva a hacer click
         document.getElementById(ev.target.id).removeEventListener("click",hacerclick,false);
     // Si ya estan las 2 cartas, compruebo el resultado
-    } else if(partida.contador=2){
-        voltea(ev.target.id);
+    } else if(partida.contador<2){
+        let idCarta=ev.target.id;
+        voltea(idCarta);
         if(partida.compruebaPareja()){
             partida.pareja=[];
             partida.contador=0;
         } else {
-            errorCartas(partida.volteada,ev.target.id);
+            setTimeout("errorCartas(partida.volteada,"+idCarta+");",3000);
         }
     }      
 }
@@ -40,7 +39,11 @@ function voltea(idCarta){
     partida.cartas[idCarta].voltea();
     document.getElementById(idCarta).src=partida.cartas[idCarta].imagen;
     partida.pareja.push(partida.cartas[idCarta]);
-    partida.contador++;
+    if(partida.cartas[idCarta].volteada){
+        partida.contador++;
+    } else {
+        partida.contador--;
+    }    
 }
 function jugar(){
     // Genero las cartas necesarias
