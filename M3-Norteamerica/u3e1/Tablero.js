@@ -9,7 +9,8 @@ function creaImg(carta,id){
     return ImagenCarta;
 }
 function errorCartas(carta1,carta2){
-    console.log("Dando vuelta a las cartas " + carta1 + " y " + carta2);
+    // Vuelvo a permitir hacer click sobre la carta
+    document.getElementById(carta1).addEventListener("click",hacerclick,false);
     voltea(carta1);
     console.log(partida.contador);
     voltea(carta2);
@@ -22,6 +23,8 @@ function hacerclick(ev){
     if (partida.contador<1){
         voltea(ev.target.id);
         partida.volteada=ev.target.id;
+        // No permito que se le vuelva a hacer click
+        document.getElementById(ev.target.id).removeEventListener("click",hacerclick,false);
     // Si ya estan las 2 cartas, compruebo el resultado
     } else if(partida.contador=2){
         voltea(ev.target.id);
