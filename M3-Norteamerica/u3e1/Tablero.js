@@ -5,8 +5,23 @@ function creaImg(carta,id){
     ImagenCarta.setAttribute('class', "carta");
     ImagenCarta.setAttribute('id', id);
     ImagenCarta.src=img;
+    //Click a una carta
     ImagenCarta.addEventListener("click",hacerclick,false);
+    // Al hacer click 
+    ImagenCarta.addEventListener("click",hacerclickEncima,false);
+    // Al pasar por encima hago la carta transparente
+    ImagenCarta.addEventListener("mouseover",porEncima,false);
+    // Al salir de encima hago la carta sin transparencia
+    ImagenCarta.addEventListener("mouseout",porFuera,false);
+    // Cada vez que me mueva voy a actualizar los contadores
+    // No es necesario, pero puedo hacerlo...
+    ImagenCarta.addEventListener("mouseover",actualizacontador,false);
+    ImagenCarta.addEventListener("mouseout",actualizacontador,false);    
     return ImagenCarta;
+}
+function actualizacontador(){
+    document.getElementById("Aciertos").innerHTML="Aciertos: "+partida.aciertos;
+    document.getElementById("Fallos").innerHTML="Fallos: "+partida.fallos;
 }
 function errorCartas(carta1,carta2){
     // Vuelvo a permitir hacer click sobre la carta
@@ -15,6 +30,43 @@ function errorCartas(carta1,carta2){
     voltea(carta2);
     partida.pareja=[];
     partida.contador=0;
+    partida.fallos++;
+    actualizacontador();  
+}
+function acierto(carta1,carta2){
+    // Quito todos los listeners
+    document.getElementById(carta1).removeEventListener("click",hacerclick,false);
+    document.getElementById(carta1).removeEventListener("click",hacerclick,false);
+    document.getElementById(carta1).removeEventListener("mouseover",porEncima,false);
+    document.getElementById(carta1).removeEventListener("mouseout",porFuera,false);
+    document.getElementById(carta2).removeEventListener("click",hacerclick,false);
+    document.getElementById(carta2).removeEventListener("click",hacerclick,false);
+    document.getElementById(carta2).removeEventListener("mouseover",porEncima,false);
+    document.getElementById(carta2).removeEventListener("mouseout",porFuera,false);
+    document.getElementById(carta1).style.border="5px solid green";
+    document.getElementById(carta2).style.border="5px solid green";
+    partida.pareja=[];
+    partida.contador=0;
+    partida.aciertos++;
+    actualizacontador();  
+}
+// Al pasar por encima hago la imagen transparente y ligeramente mas grande
+function porEncima(ev){
+    document.getElementById(ev.target.id).style.opacity="0.2";
+    document.getElementById(ev.target.id).style.height="20%";
+    document.getElementById(ev.target.id).style.width="20%";
+}
+// Al salir de encima hago la imagen opaca y la devuelvo a su tamaño
+function porFuera(ev){
+    document.getElementById(ev.target.id).style.opacity="1";
+    document.getElementById(ev.target.id).style.height="19%";
+    document.getElementById(ev.target.id).style.width="19%";
+}
+// Al hacer click lo dejo como estaba tambien
+function hacerclickEncima(ev){
+    document.getElementById(ev.target.id).style.opacity="1";
+    document.getElementById(ev.target.id).style.height="19%";
+    document.getElementById(ev.target.id).style.width="19%";
 }
 // Ejecuta una funcion basada en la lista de funciones de window
 function hacerclick(ev){
@@ -29,15 +81,12 @@ function hacerclick(ev){
         voltea(idCarta);
         if(partida.compruebaPareja()){
             // Si es correcto, pongo borde y reseteo contadores
-            document.getElementById(idCarta).style.border="5px solid green";
-            document.getElementById(partida.volteada).style.border="5px solid green";
-            partida.pareja=[];
-            partida.contador=0;
+            acierto(idCarta,partida.volteada)
         } else {
             // Si no son iguales espero 3 segundos y ejecuto error cartas
             setTimeout("errorCartas(partida.volteada,"+idCarta+");",3000);
         }
-    }      
+    }        
 }
 function voltea(idCarta){
     partida.cartas[idCarta].voltea();
@@ -50,6 +99,7 @@ function voltea(idCarta){
     }    
 }
 function jugar(){
+    actualizacontador();
     // Genero las cartas necesarias
     partida.generaCartas();
     // Muestro las cartas
