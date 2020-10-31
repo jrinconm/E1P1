@@ -5,14 +5,25 @@ class Partida {
         // Contador de aciertos
         this.aciertos=0;
         this.fallos=0;  
+        this.contador=0;
         this.parejas=parejas;
-        this.cartas=[];      
+        this.pareja=[];
+        this.cartas=[]; 
+        this.volteada=undefined   ;
+    }
+    compruebaPareja(){
+        if (this.pareja[0].nombre===this.pareja[1].nombre){
+            return true;
+        } else {
+            return false;
+        }
     }
     // Metodo que comprueba si has acabado de voltear todas la cartas
     finPartida(){
         if(this.aciertos === this.cartas.length/2) return true;
         else return false;
     }
+    // Genera las cartas de 2 en 2
     generaCartas(){
         // Creo las parejas de cartas
         for(let pareja=0;pareja <= this.parejas; pareja++){
@@ -21,6 +32,7 @@ class Partida {
             this.cartas.push(new Carta(pareja,"Imagenes/"+(pareja+1)+".png"));
         }
     }
+    // Para que las partidas sean mas amenas, movemos las cartas
     cambiaOpciones(){
         let arrayIntercambio=[...this.cartas];
         let arrayTemporal=[];
@@ -31,16 +43,8 @@ class Partida {
             arrayIntercambio.splice(extraerOpcion,1);
         }
         this.cartas = [...arrayTemporal];
-    }
-    /* muestraCartas(){
-        let div = document.createElement("div");
-        div.setAttribute("id", "Juego");
-        document.body.append(div);
-        for(const idCarta of this.cartas){
-            let img=creaImg(idCarta.imagen);
-            document.getElementById("Juego").append(img);
-        }
-    }*/ 
+    } 
+    // Inicia el juego
     jugar(){
         this.cambiaOpciones();
         muestraCartas(this);        
