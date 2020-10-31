@@ -21,6 +21,16 @@ class Partida {
             this.cartas.push(new Carta(pareja,"Imagenes/"+(pareja+1)+".png"));
         }
     }
+    muestraCartas(){
+        let div = document.createElement("div");
+        div.setAttribute("id", "Juego");
+        document.body.append(div);
+        for(const idCarta of this.cartas){
+            console.log(idCarta);
+            let img=creaImg(idCarta.imagen);
+            document.getElementById("Juego").append(img);
+        }
+    }
     jugar(){
 
     }
