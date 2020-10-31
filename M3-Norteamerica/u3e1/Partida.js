@@ -21,17 +21,28 @@ class Partida {
             this.cartas.push(new Carta(pareja,"Imagenes/"+(pareja+1)+".png"));
         }
     }
-    muestraCartas(){
+    cambiaOpciones(){
+        let arrayIntercambio=[...this.cartas];
+        let arrayTemporal=[];
+        let cantidadOpciones=arrayIntercambio.length;
+        for(let cont=0;cont<cantidadOpciones;cont++){
+            let extraerOpcion=Math.floor(Math.random()*arrayIntercambio.length);
+            arrayTemporal.push(arrayIntercambio[extraerOpcion]);
+            arrayIntercambio.splice(extraerOpcion,1);
+        }
+        this.cartas = [...arrayTemporal];
+    }
+    /* muestraCartas(){
         let div = document.createElement("div");
         div.setAttribute("id", "Juego");
         document.body.append(div);
         for(const idCarta of this.cartas){
-            console.log(idCarta);
             let img=creaImg(idCarta.imagen);
             document.getElementById("Juego").append(img);
         }
-    }
+    }*/ 
     jugar(){
-
+        this.cambiaOpciones();
+        muestraCartas(this);        
     }
 }
