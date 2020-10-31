@@ -184,9 +184,9 @@ function darModificacionpaciente(){
     let idPersonal=document.getElementById("hidden1").value;
     // El paciente es el tercero de los ocultos
     let idPaciente=document.getElementById("hidden2").value;    
-    hospitales[idHospital].personal[idPersonal].paciente[idPaciente].nombre=document.getElementById("nombre").value;
-    hospitales[idHospital].personal[idPersonal].paciente[idPaciente].enfermedad=document.getElementById("Enfermedad").value;
-    personalMostrar();
+    hospitales[idHospital].personal[idPersonal].pacientes[idPaciente].nombre=document.getElementById("nombre").value;
+    hospitales[idHospital].personal[idPersonal].pacientes[idPaciente].enfermedad=document.getElementById("enfermedad").value;
+    pacienteMostrar();
 }
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
