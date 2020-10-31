@@ -28,8 +28,8 @@ function validarGramos(){
     valida("gramos",patron);
 }
 function validarComposicion(){
-    // Entre el 1000 y el 4999 o 5000
-    let patron=/^\d]{1,}g([A-Za-z]{1,2}[\d]{0,1}){2}$/;
+    //Cantidad+g+(letras+numero)*2
+    let patron=/^[\d]{1,}g([A-Za-z]{1,2}[\d]{0,1}){2}$/;
     valida("composicion",patron);
 }
 // Borra la X si es correcta
