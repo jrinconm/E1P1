@@ -128,6 +128,7 @@ function pacienteBaja(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");    
     creaFormulario([],"visualizacion"+"paciente","Baja");  
+    // Refrescco en cascada las listas
     document.getElementById("Hospital").addEventListener("change",refrescaListaPersonal,false);
     document.getElementById("Hospital").addEventListener("change",refrescaListaPacienteHospital,false);
     document.getElementById("Personal").addEventListener("change",refrescaListaPacientePersonal,false);        
@@ -151,12 +152,16 @@ function pacienteModificar(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");    
     creaFormulario([],"visualizacion"+"paciente","Modificar");  
+    document.getElementById("Hospital").addEventListener("change",refrescaListaPersonal,false);
+    document.getElementById("Hospital").addEventListener("change",refrescaListaPacienteHospital,false);
+    document.getElementById("Personal").addEventListener("change",refrescaListaPacientePersonal,false);        
 }
 //Funcion al hacer click en Modificar personal
 function personalModificar(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");    
     creaFormulario([],"visualizacion"+"personal","Modificar"); 
+    document.getElementById("Hospital").addEventListener("change",refrescaListaPersonal,false);         
 }
 //Funcion al hacer click en Modificar hospital
 function hospitalModificar(){

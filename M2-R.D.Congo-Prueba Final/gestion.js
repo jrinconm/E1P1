@@ -161,6 +161,7 @@ function addItemListaForm(item,lista,form,esArray){
     form.appendChild(br);
 }
 // Funcion que crea un formulario
+// Pendiente de simplificar
 function creaFormulario(objeto,div,accion='Alta'){
     let formulario = document.createElement("form");
     formulario.setAttribute('id',div.replace('visualizacion','form'));
@@ -187,6 +188,7 @@ function creaFormulario(objeto,div,accion='Alta'){
                     break;
             }
             break;
+        case 'Modificar': 
         case 'Baja':
             switch (div){
                 case 'visualizacionhospital':
