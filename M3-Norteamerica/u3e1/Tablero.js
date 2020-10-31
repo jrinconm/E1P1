@@ -11,24 +11,24 @@ function creaImg(carta,id){
 function errorCartas(carta1,carta2){
     console.log("Dando vuelta a las cartas " + carta1 + " y " + carta2);
     voltea(carta1);
+    console.log(partida.contador);
     voltea(carta2);
+    console.log(partida.contador);
     partida.pareja=[];
+    partida.contador=0;
 }
 // Ejecuta una funcion basada en la lista de funciones de window
 function hacerclick(ev){
     if (partida.contador<1){
-        console.log("Contador = 1. Carta id: " + ev.target.id);
         voltea(ev.target.id);
         partida.volteada=ev.target.id;
     // Si ya estan las 2 cartas, compruebo el resultado
     } else if(partida.contador=2){
-        console.log("Contador = 2. Carta id: " + ev.target.id);
         voltea(ev.target.id);
         if(partida.compruebaPareja()){
-            console.log("Bien");
             partida.pareja=[];
+            partida.contador=0;
         } else {
-            console.log("Mal");
             errorCartas(partida.volteada,ev.target.id);
         }
     }      
@@ -37,24 +37,13 @@ function voltea(idCarta){
     partida.cartas[idCarta].voltea();
     document.getElementById(idCarta).src=partida.cartas[idCarta].imagen;
     partida.pareja.push(partida.cartas[idCarta]);
-    // Doy la vuelta, sumo a contador
-    if(partida.cartas[idCarta].volteada){
-        partida.contador++;
-    // Si la tapo, resto a contador
-    } else {
-        partida.contador--;
-    }
+    partida.contador++;
 }
 function jugar(){
     // Genero las cartas necesarias
     partida.generaCartas();
     // Muestro las cartas
     partida.jugar();
-    //partida.muestraCartas();
-    //if(finPartida()){
-    //   console.log("Se acabo")
-    //}
-
 }
 function muestraCartas(partida){
     let div = document.createElement("div");
