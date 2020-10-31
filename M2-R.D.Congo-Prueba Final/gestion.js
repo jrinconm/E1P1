@@ -37,14 +37,14 @@ function creaListaFormulario(nombre,listado,array){
     entrada.setAttribute("class", "entradaLista");
     if(array){
         for(const opcion in listado){
-            var item = document.createElement("option");
+            let item = document.createElement("option");
             item.text = listado[opcion];
             item.value = listado[opcion];
             entrada.add(item);
         }
     } else {
         for(const opcion in listado){
-            var item = document.createElement("option");
+            let item = document.createElement("option");
             item.text = listado[opcion].nombre;
             item.value = listado[opcion].nombre;
             entrada.add(item);
@@ -60,14 +60,14 @@ function refrescaListaFormulario(lista,nuevasopciones,array){
     // Añado las nuevas opciones
     if(array){
         for(const opcion in nuevasopciones){
-            var item = document.createElement("option");
+            let item = document.createElement("option");
             item.text = nuevasopciones[opcion];
             item.value = nuevasopciones[opcion];
             lista.add(item);
         }
     } else {
         for(const opcion in nuevasopciones){
-            var item = document.createElement("option");
+            let item = document.createElement("option");
             item.text = nuevasopciones[opcion].nombre;
             item.value = nuevasopciones[opcion].nombre;
             lista.add(item);
@@ -82,6 +82,8 @@ function darAltahospital(){
     let responsable=document.getElementById("formhospital").elements["Responsable"].value;
     let hospital=new Hospital(nombre,localidad,responsable);
     hospitales.push(hospital);
+    // Muestro los hospitales
+    hospitalMostrar();
 }
 // Da de alta personal 
 function darAltapersonal(){
@@ -89,6 +91,8 @@ function darAltapersonal(){
     let especialidad=document.getElementById("Especialidad").value;
     let hospital=document.getElementById("Hospital").selectedIndex;
     hospitales[hospital].addPersonal(new Personal(nombre,especialidad));
+    // Muestro el Personal
+    personalMostrar();
 }
 // Da de alta paciente 
 function darAltapaciente(){
@@ -97,12 +101,16 @@ function darAltapaciente(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     let personal=document.getElementById("Personal").selectedIndex;
     hospitales[hospital].personal[personal].addPaciente(new Paciente(nombre,enfermedad));
+    // Muestro los pacientes
+    pacienteMostrar();
 }
 // Funciones de baja con formularios comprobados
 // Da de baja hospital 
 function darBajahospital(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     hospitales=eliminaIndiceArray(hospitales,hospital);
+    // Muestro los hospitales
+    hospitalMostrar();
 }
 // Da de baja personal
 function darBajapersonal(){
@@ -120,6 +128,19 @@ function darBajapaciente(){
     hospitales[hospital].personal[persona].eliminaPaciente(paciente);
     //Refresco el div
     pacienteBaja();
+}
+// Funciones de modificacion con formularios comprobados
+// Muestra el panel para Modifica hospital 
+function darModificarhospital(){
+    // El hospital a modificar es el del indice seleccionado
+    let idHospital=document.getElementById("Hospital").selectedIndex;
+    creaBorraDiv("hospital");
+    // Creo el formulario
+    creaFormulario(hospitales[idHospital],"visualizacion"+"hospital","Modificacion",idHospital);  
+}
+//Realizo la modificacion del hospital
+function darModificacionhospital(){
+    let hospital=document.getElementById("Hospital").selectedIndex;
 }
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
@@ -144,13 +165,17 @@ function creaLabelFormulario(nombre){
     label.innerText=nombre+": ";
     return label;
 }
-function addItemEntradaForm(item,form){
+function addItemEntradaForm(item,form,valor){
     let label=creaLabelFormulario(item);
     form.appendChild(label);
     let entrada=creaEntradaFormulario(item);
     form.appendChild(entrada);
+    if(valor){
+        entrada.value=valor;  
+    }
     let br = document.createElement("br"); 
     form.appendChild(br);  
+
 }
 function addItemListaForm(item,lista,form,esArray){
     let label=creaLabelFormulario(item);
@@ -162,10 +187,21 @@ function addItemListaForm(item,lista,form,esArray){
 }
 // Funcion que crea un formulario
 // Pendiente de simplificar
-function creaFormulario(objeto,div,accion='Alta'){
+function creaFormulario(objeto,div,accion='Alta',id){
     let formulario = document.createElement("form");
     formulario.setAttribute('id',div.replace('visualizacion','form'));
     switch (accion){
+        case 'Modificacion':
+            for(const propiedad in objeto){
+                if(typeof(objeto[propiedad]) !== 'object'){
+                    addItemEntradaForm(propiedad,formulario,objeto[propiedad]);
+                }  
+                //let oculto = document.createElement("hidden");                 
+                //oculto.setAttribute("value", id);
+                //oculto.setAttribute("id", "hiddenID");
+                //formulario.appendChild(oculto);  
+            }          
+            break; 
         //Por defecto la acción es alta
         case 'Alta':
             for(const propiedad in objeto){

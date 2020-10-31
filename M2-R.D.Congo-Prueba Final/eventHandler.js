@@ -9,7 +9,7 @@ function hacerclick(ev){
 function hacersubmit(ev){
     ev.preventDefault();
     let formulario=ev.target.parentNode;
-    if(compruebaFormulario(formulario)){        
+    if(compruebaFormulario(formulario)){       ;
         // Es sucio, pero me permite llamar una funcion por el nombre de la lista de funciones de la ventana
         window["dar"+ev.target.className](ev.target.parentNode);
     }
@@ -117,7 +117,7 @@ function personalMostrar(){
 }
 //Funcion al hacer click en Mostrar hospital
 function hospitalMostrar(){
-    // Borro y creo el div de personal
+    // Borro y creo el div de hospital
     creaBorraDiv("hospital");
     let tabla=creaTablaObjeto(hospitales,"visualizacion"+"hospital");  
     document.getElementById("visualizacion"+"hospital").appendChild(tabla);      
