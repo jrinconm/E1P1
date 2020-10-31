@@ -141,12 +141,9 @@ function darModificarhospital(){
 //Realizo la modificacion del hospital
 function darModificacionhospital(){
     let idHospital=document.getElementById("hiddenIdHospital").value;
-    console.log(hospitales[idHospital]);
-    console.log(document.getElementById("formhospital").elements);
-    hospitales[idHospital].nombre==document.getElementById("formhospital").elements["nombre"].value;
+    hospitales[idHospital].nombre=document.getElementById("formhospital").elements["nombre"].value;
     hospitales[idHospital].localidad=document.getElementById("formhospital").elements["localidad"].value;
     hospitales[idHospital].responsable=document.getElementById("formhospital").elements["responsable"].value;
-    
 }
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
