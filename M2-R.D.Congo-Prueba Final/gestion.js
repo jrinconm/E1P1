@@ -140,7 +140,13 @@ function darModificarhospital(){
 }
 //Realizo la modificacion del hospital
 function darModificacionhospital(){
-    let hospital=document.getElementById("Hospital").selectedIndex;
+    let idHospital=document.getElementById("hiddenIdHospital").value;
+    console.log(hospitales[idHospital]);
+    console.log(document.getElementById("formhospital").elements);
+    hospitales[idHospital].nombre==document.getElementById("formhospital").elements["nombre"].value;
+    hospitales[idHospital].localidad=document.getElementById("formhospital").elements["localidad"].value;
+    hospitales[idHospital].responsable=document.getElementById("formhospital").elements["responsable"].value;
+    
 }
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){
@@ -185,6 +191,13 @@ function addItemListaForm(item,lista,form,esArray){
     let br = document.createElement("br"); 
     form.appendChild(br);
 }
+function addItemOcultoForm(id,valor,form){
+    let oculto = document.createElement("input");  
+    oculto.setAttribute("type", "hidden");               
+    oculto.setAttribute("value", valor);
+    oculto.setAttribute("id", id);
+    form.appendChild(oculto); 
+}
 // Funcion que crea un formulario
 // Pendiente de simplificar
 function creaFormulario(objeto,div,accion='Alta',id){
@@ -196,10 +209,7 @@ function creaFormulario(objeto,div,accion='Alta',id){
                 if(typeof(objeto[propiedad]) !== 'object'){
                     addItemEntradaForm(propiedad,formulario,objeto[propiedad]);
                 }  
-                //let oculto = document.createElement("hidden");                 
-                //oculto.setAttribute("value", id);
-                //oculto.setAttribute("id", "hiddenID");
-                //formulario.appendChild(oculto);  
+                addItemOcultoForm("hiddenIdHospital",id,formulario)
             }          
             break; 
         //Por defecto la acción es alta
