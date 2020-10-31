@@ -6,27 +6,43 @@
 </head>    
 <body>
     <p>
-    Comprobamos la fecha y la hora de creacion<br/>
-    <label>Fecha y hora de creación:</label>
-    <input type="text" name="fecha" id="fecha" maxlength="16"/>
-    <img id="fechaImg"/><br>
-    <input type="button" name="fechaBoton" id="fechaBoton" value="Comprobar"/><br>
+        Comprobamos la fecha y la hora de creacion en formato "dd/mm/aaaa hh:mm"<br/>
+        <label>Fecha y hora de creación:</label>
+        <input type="text" name="fecha" id="fecha" maxlength="16"/>
+        <img id="fechaImg"/><br>
+        <input type="button" name="fechaBoton" id="fechaBoton" value="Comprobar"/><br>
     </p>
     <p>
-    Comprobamos el cocinero<br/>
-    <label>Cocinero:</label>
-    <input type="text" name="fecha" id="fecha"/>
-    <img id="fechaImg"/><br>
-    <input type="button" name="fechaBoton" id="fechaBoton" value="comprobar"/><br>
-    <img src=""/>
+        Comprobamos el cocinero formado por dos letras en mayúscula, un símbolo y cuatro dígitos (ej. WW$1234)<br/>
+        <label>Cocinero:</label>
+        <input type="text" name="cocinero" id="cocinero"/>
+        <img id="cocineroImg"/><br>
+        <input type="button" name="cocineroBoton" id="cocineroBoton" value="comprobar"/><br>
+        <img src=""/>
     </p>
-Al pulsar el botón, si la expresión introducida en el campo de texto es correcta, se mostrará una imagen con un tick verde; de lo contrario se mostrará una cruz roja.
-
-Los campos a validar son:
-Fecha y hora de creación: en formato "dd/mm/aaaa hh:mm".
-Cocinero: será un nombre en clave formado por dos letras en mayúscula, un símbolo y cuatro dígitos (ej. WW$1234)
-Destinatario: estará formado por dos o tres letras mayúsculas correspondientes al estado, un guión bajo, el nombre de la ciudad en minúsculas, dos puntos, y el código de distrito de 4 digitos (ej. NM_alburquerque:1234).
-Gramos: será un número del 1000 al 5000.
-Composición: estará formado por una cantidad en gramos seguida de dos conjuntos de una o dos letras seguidas o no de un número. (ej. 200gC3OH7)
+    <p>
+        Comprobamos el destinatario formado por dos o tres letras mayúsculas correspondientes al estado, un guión bajo, el nombre de la ciudad en minúsculas, dos puntos, y el código de distrito de 4 digitos (ej. NM_alburquerque:1234).<br/>
+        <label>Destinatario:</label>
+        <input type="text" name="destinatario" id="destinatario"/>
+        <img id="destinatarioImg"/><br>
+        <input type="button" name="destinatarioBoton" id="destinatarioBoton" value="comprobar"/><br>
+        <img src=""/>
+    </p>    
+    <p>
+        Comprobamos los gramos entre el 1000 al 5000.<br/>
+        <label>Gramos:</label>
+        <input type="text" name="gramos" id="gramos"/>
+        <img id="gramosImg"/><br>
+        <input type="button" name="gramosBoton" id="gramosBoton" value="comprobar"/><br>
+        <img src=""/>
+    </p>    
+    <p>
+        Comprobamos la composicion formado por una cantidad en gramos seguida de dos conjuntos de una o dos letras seguidas o no de un número. (ej. 200gC3OH7)<br/>
+        <label>Composicion:</label>
+        <input type="text" name="composicion" id="composicion"/>
+        <img id="composicionImg"/><br>
+        <input type="button" name="composicionBoton" id="composicionBoton" value="comprobar"/><br>
+        <img src=""/>
+    </p>    
 </body>
 </html>
