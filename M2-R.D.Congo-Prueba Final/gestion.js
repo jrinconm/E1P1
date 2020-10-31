@@ -109,8 +109,8 @@ function darBajapersonal(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     let persona=document.getElementById("Personal").selectedIndex;
     hospitales[hospital].eliminaPersonal(persona);
-    //Refresco al lista
-    refrescaListaPersonal();
+    //Refresco el div
+    personalBaja();
 }
 // Da de baja paciente  
 function darBajapaciente(){
@@ -118,8 +118,8 @@ function darBajapaciente(){
     let persona=document.getElementById("Personal").selectedIndex;
     let paciente=document.getElementById("Paciente").selectedIndex;
     hospitales[hospital].personal[persona].eliminaPaciente(paciente);
-    //Refresco la lista
-    refrescaListaPacienteHospital();
+    //Refresco el div
+    pacienteBaja();
 }
 //Elimina un indice de un array
 function eliminaIndiceArray(array,indice){

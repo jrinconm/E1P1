@@ -136,7 +136,8 @@ function pacienteBaja(){
 function personalBaja(){
     // Borro y creo el div de personal
     creaBorraDiv("personal");   
-    creaFormulario([],"visualizacion"+"personal","Baja");           
+    creaFormulario([],"visualizacion"+"personal","Baja");  
+    document.getElementById("Hospital").addEventListener("change",refrescaListaPersonal,false);         
 }
 //Funcion al hacer click en Baja hospital
 function hospitalBaja(){
@@ -149,7 +150,7 @@ function hospitalBaja(){
 function pacienteModificar(){
     // Borro y creo el div de paciente
     creaBorraDiv("paciente");    
-    creaFormulario([],"visualizacion"+"paciente","Baja");  
+    creaFormulario([],"visualizacion"+"paciente","Modificar");  
 }
 //Funcion al hacer click en Modificar personal
 function personalModificar(){
