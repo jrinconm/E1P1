@@ -1,7 +1,7 @@
 window.onload=iniciar;
 // Funcion principal al cargar el documento
 function iniciar(){
-    creaFormAutentificacion();
+    compruebaAutentificacion();
 }
 // Borra el div 
 function borraDiv(elemento){
@@ -85,6 +85,14 @@ function creaEntradaTXTFormulario(nombre){
     entrada.setAttribute("class", "entradaTexto");
     return entrada;
 }
+function compruebaAutentificacion(){
+    if(localStorage.getItem("Contraseña")){
+        creaDiv("divFirma"); 
+        creaFormularioFirma("formFirma","divFirma");
+    } else {
+        creaFormAutentificacion();
+    }
+}
 function creaFormAutentificacion(){
     creaDiv("divAutentificacion"); 
     creaFormularioAutentificacion("formAutentificacion","divAutentificacion");
@@ -98,6 +106,7 @@ function hacerSubmitAutentificacion(e){
     e.preventDefault();
     let entradapass=document.getElementById("entradaAutentificacion").value;
     if (entradapass==="sobresaliente"){
+        localStorage.setItem("Contraseña",true)
         creaFormFirma();
     }
 }
