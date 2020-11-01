@@ -1,6 +1,10 @@
 window.onload=iniciar;
+// Genero la alerta
+alerta=generaAlerta();
 // Funcion principal al cargar el documento
 function iniciar(){
+    //Añado la comprobación de tecla pulsada para cancelar la alerta en todo el documento
+    document.addEventListener("keydown",cancelaAlerta,false)
     compruebaAutentificacion();
 }
 // Borra el div 
@@ -67,7 +71,10 @@ function creaFormularioFirma(nombre,div){
     enviar.addEventListener("click",hacerSubmitFirma,false);
     form.appendChild(enviar);
     document.getElementById(div).appendChild(form); 
+    // Cuando hago foco añado el texto
+    document.getElementById("entradafirma").addEventListener("focus",addTexto,false);
 }
+//Añade una etiqueta con texto a un formulario
 function creaLabelFormulario(nombre,form,texto){
     let label=document.createElement("label"); 
     label.setAttribute('id',nombre);
@@ -85,6 +92,12 @@ function creaEntradaTXTFormulario(nombre){
     entrada.setAttribute("class", "entradaTexto");
     return entrada;
 }
+// Funcion que añade el texto
+function addTexto(){
+    console.log("Evento lanzado")
+    document.getElementById("entradafirma").value="S4ND1EG0";
+}
+// Comprueba en localStorage si estamos autentificados
 function compruebaAutentificacion(){
     if(localStorage.getItem("Contraseña")){
         creaDiv("divFirma"); 
@@ -93,15 +106,18 @@ function compruebaAutentificacion(){
         creaFormAutentificacion();
     }
 }
+// Crea el formulario para la contraseña
 function creaFormAutentificacion(){
     creaDiv("divAutentificacion"); 
     creaFormularioAutentificacion("formAutentificacion","divAutentificacion");
 }
+// Crea el formulario para las firmas
 function creaFormFirma(){
     borraDiv("divAutentificacion");
-    creaDiv("divFirma"); 
+    creaDiv("divFirma");  
     creaFormularioFirma("formFirma","divFirma");
 }
+//Comprueba la contraseña y lo graba si es correcta
 function hacerSubmitAutentificacion(e){
     e.preventDefault();
     let entradapass=document.getElementById("entradaAutentificacion").value;
@@ -110,6 +126,7 @@ function hacerSubmitAutentificacion(e){
         creaFormFirma();
     }
 }
+//Comprueba los distintos campos
 function hacerSubmitFirma(e){
     e.preventDefault();
     valida("entradaNombre",/^[\w]{2,32}$/);
@@ -117,6 +134,7 @@ function hacerSubmitFirma(e){
     valida("entradaidFirma",/^[\d]{1,10}$/);
     valida("entradafirma",/^S4ND1EG0[\w]{0,42}$/);
 }
+// Funcion para comprobar un input con un patron
 function valida(identificador,patron){
     let elemento = document.getElementById(identificador);
     if(patron.test(elemento.value)){
@@ -127,6 +145,14 @@ function valida(identificador,patron){
         return false;
     }
 }
-function alerta(){
-    alert("Ponte a trabajar, no seas Jessie Pinkman");
+// Funcion que crea un Timeout y lo devuelve
+function generaAlerta(){
+    let idA=setTimeout("alert('Ponte a trabajar, no seas Jessie Pinkman');",15000);
+    return idA;
+}
+function cancelaAlerta(){
+    //Cancelo la alerta
+    clearTimeout(alerta);
+    //vuelvo a generarla para que se siga trabajando
+    alerta=generaAlerta();
 }
