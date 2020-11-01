@@ -112,10 +112,20 @@ function hacerSubmitAutentificacion(e){
 }
 function hacerSubmitFirma(e){
     e.preventDefault();
-
+    valida("entradaNombre",/^[\w]{2,32}$/);
+    valida("entradaNumero",/^[\d]{8}[A-Za-z]{1}$/);
+    valida("entradaidFirma",/^[\d]{1,10}$/);
+    valida("entradafirma",/^S4ND1EG0[\w]{0,42}$/);
 }
-function validar(){
-
+function valida(identificador,patron){
+    let elemento = document.getElementById(identificador);
+    if(patron.test(elemento.value)){
+        elemento.className="";
+        return true;
+    } else {
+        elemento.className="error";
+        return false;
+    }
 }
 function alerta(){
     alert("Ponte a trabajar, no seas Jessie Pinkman");
