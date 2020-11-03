@@ -189,4 +189,3 @@ let nodoFallosTexto=document.createTextNode("Fallos: " + juego.fallos +" ");
 document.getElementById("resultado").appendChild(nodoResultadosTexto);
 document.getElementById("resultado").appendChild(nodoAciertosTexto);
 document.getElementById("resultado").appendChild(nodoFallosTexto);
-
