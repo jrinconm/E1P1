@@ -252,8 +252,7 @@ function creaFormulario(objeto,div,accion='Alta',ocultos){
                         addItemListaForm("Especialidad",["Médico","Enfermera","Celador"],formulario,true);
                     } else {
                         addItemEntradaForm(propiedad,formulario,objeto[propiedad]);
-                    }
-                    
+                    }                    
                 }                  
             }   
             for(const oculto in ocultos){
@@ -289,6 +288,8 @@ function creaFormulario(objeto,div,accion='Alta',ocultos){
                     // Compruebo si hay un hospital como minimo
                     if(hospitales.length!=0){
                         addItemListaForm("Hospital",hospitales,formulario);
+                    } else {
+                        addItemListaForm("Hospital",[],formulario,true);
                     }
                     break;
                 case 'visualizacionpersonal':                    
@@ -298,8 +299,14 @@ function creaFormulario(objeto,div,accion='Alta',ocultos){
                         // Compruebo si hay un personal como minimo
                         if(hospitales[0].personal!=0){
                             addItemListaForm("Personal",hospitales[0].personal,formulario);
+                        } else {
+                            addItemListaForm("Personal",[],formulario,true);
                         }
-                    }
+                    //Si no, lo creo vacio
+                    } else {
+                        addItemListaForm("Hospital",[],formulario,true);  
+                        addItemListaForm("Personal",[],formulario,true);    
+                    }                    
                     break;
                 case 'visualizacionpaciente':
                     // Compruebo si hay un hospital como minimo
@@ -311,8 +318,20 @@ function creaFormulario(objeto,div,accion='Alta',ocultos){
                             //Compruebo si hay pacientes
                             if(hospitales[0].personal[0].pacientes.length!=0){
                                 addItemListaForm("Paciente",hospitales[0].personal[0].pacientes,formulario);
-                            }                    
+                            } else {
+                                // Si no hay pacientes, creo la lista vacia
+                                addItemListaForm("Paciente",[],formulario, true);
+                            }
+                        //Si no hay personal en ese hospital
+                        } else {
+                            addItemListaForm("Personal",[],formulario,true);
+                            addItemListaForm("Paciente",[],formulario, true);
                         }
+                        // Si no hay ni hospitales
+                    } else {
+                        addItemListaForm("Hospital",[],formulario,true); 
+                        addItemListaForm("Personal",[],formulario,true);
+                        addItemListaForm("Paciente",[],formulario, true);  
                     }
                     break;
             }            

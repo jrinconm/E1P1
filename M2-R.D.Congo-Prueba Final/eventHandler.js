@@ -20,7 +20,9 @@ function refrescaListaPersonal(){
     let hospital=document.getElementById("Hospital").selectedIndex;
     let select=document.getElementById("Personal");
     let personal=hospitales[hospital].personal;
-    refrescaListaFormulario(select,personal);
+    if(personal.length){
+        refrescaListaFormulario(select,personal);
+    }
 }
 function refrescaListaPacienteHospital(){
     //He cambiado el hospital, refresco la gente tambien
