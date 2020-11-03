@@ -21,9 +21,11 @@ function pincharClub(){
     }
 }
 // Funcion llamada al hacer click en enviar. Inicia la validacion
-function validar(){
+function validar(e){
+    // Desactivo que se envíe
+    e.preventDefault();
     // Lista de campos a validar
-    let camposValidar=["identificador","nombre","fechaNacimiento","correo","telefono","edad","socio"]
+    let camposValidar=["identificador","nombre","fechaNacimiento","correo","telefono","socio"]
     for(const campo of camposValidar){
         valida(campo);
     }
