@@ -11,6 +11,7 @@ class Partida {
         this.cartas=[]; 
         this.volteada=undefined   ;
     }
+    // Compruebo si son pareja de cartas
     compruebaPareja(){
         if (this.pareja[0].nombre===this.pareja[1].nombre){
             return true;

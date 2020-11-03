@@ -11,8 +11,12 @@ function creaImg(carta,id){
     ImagenCarta.addEventListener("click",hacerclickEncima,false);
     // Al pasar por encima hago la carta transparente
     ImagenCarta.addEventListener("mouseover",porEncima,false);
+    // Al pasar por encima hago la carta con borde
+    ImagenCarta.addEventListener("mouseover",porEncimaBorde,false);
     // Al salir de encima hago la carta sin transparencia
     ImagenCarta.addEventListener("mouseout",porFuera,false);
+    // Al salir de encima hago la carta sin borde
+    ImagenCarta.addEventListener("mouseout",porFueraBorde,false);  
     // Cada vez que me mueva voy a actualizar los contadores
     // No es necesario, pero puedo hacerlo...
     ImagenCarta.addEventListener("mouseover",actualizacontador,false);
@@ -38,11 +42,15 @@ function acierto(carta1,carta2){
     document.getElementById(carta1).removeEventListener("click",hacerclick,false);
     document.getElementById(carta1).removeEventListener("click",hacerclick,false);
     document.getElementById(carta1).removeEventListener("mouseover",porEncima,false);
+    document.getElementById(carta1).removeEventListener("mouseover",porEncimaBorde,false);
     document.getElementById(carta1).removeEventListener("mouseout",porFuera,false);
+    document.getElementById(carta1).removeEventListener("mouseout",porFueraBorde,false);
     document.getElementById(carta2).removeEventListener("click",hacerclick,false);
     document.getElementById(carta2).removeEventListener("click",hacerclick,false);
     document.getElementById(carta2).removeEventListener("mouseover",porEncima,false);
+    document.getElementById(carta2).removeEventListener("mouseover",porEncimaBorde,false);
     document.getElementById(carta2).removeEventListener("mouseout",porFuera,false);
+    document.getElementById(carta2).removeEventListener("mouseout",porFueraBorde,false);    
     document.getElementById(carta1).style.border="5px solid green";
     document.getElementById(carta2).style.border="5px solid green";
     partida.pareja=[];
@@ -56,11 +64,18 @@ function porEncima(ev){
     document.getElementById(ev.target.id).style.height="20%";
     document.getElementById(ev.target.id).style.width="20%";
 }
+function porEncimaBorde(ev){
+    document.getElementById(ev.target.id).style.border="2px solid red";
+}
 // Al salir de encima hago la imagen opaca y la devuelvo a su tamaño
 function porFuera(ev){
     document.getElementById(ev.target.id).style.opacity="1";
     document.getElementById(ev.target.id).style.height="19%";
     document.getElementById(ev.target.id).style.width="19%";
+}
+// Al salir de encima le quito el borde
+function porFueraBorde(ev){
+    document.getElementById(ev.target.id).style.border="";
 }
 // Al hacer click lo dejo como estaba tambien
 function hacerclickEncima(ev){
@@ -88,6 +103,7 @@ function hacerclick(ev){
         }
     }        
 }
+// Da vuelta a la carta y cuenta si puede seguir volteando
 function voltea(idCarta){
     partida.cartas[idCarta].voltea();
     document.getElementById(idCarta).src=partida.cartas[idCarta].imagen;
@@ -98,6 +114,7 @@ function voltea(idCarta){
         partida.contador--;
     }    
 }
+// Arranca el juego
 function jugar(){
     actualizacontador();
     // Genero las cartas necesarias
@@ -105,6 +122,7 @@ function jugar(){
     // Muestro las cartas
     partida.jugar();
 }
+// Pinta las cartas en la pantalla
 function muestraCartas(partida){
     let div = document.createElement("div");
     div.setAttribute("id", "Juego");
